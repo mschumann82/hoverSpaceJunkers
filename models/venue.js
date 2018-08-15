@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     const Venue = sequelize.define("Venue", {
-      artist: {
+      venue: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
