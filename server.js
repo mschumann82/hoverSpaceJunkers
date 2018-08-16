@@ -1,9 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const keys = require("./keys.js");
+const path = require("path");
 const PORT = process.env.PORT || 8080;
 
 const db = require("./models");
+require('dotenv').config()
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
 require("./routes/api-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
 
 
