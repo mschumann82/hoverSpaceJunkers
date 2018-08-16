@@ -14,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
       Venue.belongsTo(models.User, {
         foreignKey: {
           allowNull: false
-        }
+        },
+        unique: true
       });
     };
   
