@@ -30,6 +30,7 @@ app.get("/", function(req, res) {
           if (!error && response.statusCode === 200) {
               
               console.log(JSON.parse(body)._embedded);
+              res.json(JSON.parse(body)._embedded);
               
           }
         })
