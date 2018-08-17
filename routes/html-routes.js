@@ -1,12 +1,13 @@
 const request = require("request");
 require("dotenv").config();
 // const path = require("path");
+const keys = require("./../keys");
 module.exports = function(app) {
 
 
 
 // const ticketmaster = require('ticketmaster');
-const keys = require("./../keys");
+
 
 
 const ticket = keys.ticket.id;

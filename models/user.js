@@ -22,6 +22,13 @@ module.exports = function(sequelize, DataTypes) {
               len: [2,2]
             }
           },
+          password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+              len: [6]
+            }
+          },
     });
   
     User.associate = function(models) {
