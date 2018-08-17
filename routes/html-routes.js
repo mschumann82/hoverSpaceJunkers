@@ -6,19 +6,12 @@ module.exports = function(app) {
 
 
 
-// const ticketmaster = require('ticketmaster');
+
 
 
 
 const ticket = keys.ticket.id;
 
-// app.get("/", function(req, res) {
-//     ticketmaster(ticket).discovery.v2.event.all()
-//         .then(function(result) {
-//             res.json(result);
-//   // "result" is an object of Ticketmaster events information
-// });
-//   });
 
 app.get("/", function(req, res) {
     // req.sendFile(path.join(__dirname, "../views/main.html"));
