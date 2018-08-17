@@ -1,0 +1,18 @@
+#myCarousel {
+    color:white;
+    text-align: center;
+    position: relative;
+
+
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    z-index: 1;
+
+}
+
