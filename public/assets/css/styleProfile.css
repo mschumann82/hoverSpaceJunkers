@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Asap:400,500,700');
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    margin: 0% !important;
+}
+#searchBar {
+    margin-left: 550px;
+    margin-top:.5%
+}
+#table_filter{
+    width: 500px;
+}
+
+#categoryBtn {
+    color: black;
+    margin-right: 20px;
+}
+
+.dropdown-menu.show{
+    margin-left: 435px;
+}
+.category-label {
+    font-size: 12px;
+
+}
+
+#searchBtn {
+    margin-right: 400px;
+    color: black;
+}
+
+#signOut {
+    
+    margin-right: 200px;
+}
+
+.row {
+    color: white;
+} 
+
+#hsj {
+    font-size: 32px;
+}
+a {
+    color: white !important;
+    font-size: 18px;
+    
+}
+
+.category_filters{
+    color: black;
+}
+
+
+#titleBox {
+    border-left-style: ridge;
+    border-left-color: #CEEAF7;
+    border-left-width: 5px;
+    border-top-style: ridge;
+    border-top-color: #CEEAF7;
+    border-top-width: 5px;
+}
+
+th {
+    width: 200px;
+}
+
+#Artist {
+    font-family: Asap, sans-serif !important;
+    font-size: 36px !important;
+    text-align: center;
+    border-left-style: ridge;
+    border-left-color: #CEEAF7;
+    border-left-width: 5px;
+}
+
+#Venues {
+    font-family: Asap, sans-serif;
+    font-size: 36px !important;
+    text-align: center;
+    border-left-style: ridge;
+    border-left-color: #CEEAF7;
+    border-left-width: 5px;
+    border-top-style: ridge;
+    border-top-color: #CEEAF7;
+    border-top-width: 5px;
+
+  
+}
+
+li {
+    font-size: 24px;
+    text-align: left;
+    padding-left: 20px;
+}
+.footer {
+    position: absolute;
+    right: 0;        
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    border-top-style: ridge;
+    border-top-color: #CEEAF7;
+    border-top-width: 5px;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    min-height: 100vh;
+}
+
+#font {
+    font-size: 24px;
+    text-align: center;
+}
