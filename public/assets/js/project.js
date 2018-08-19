@@ -1,13 +1,10 @@
 
-var search;
+// var search;
 
 $(document).ready( function() {
 
 
     
-
-
-
 
    
 
@@ -15,51 +12,48 @@ $(document).ready( function() {
         console.log("clicked");
         // Don't refresh the page!
         event.preventDefault();
+        var radio = $("input[name=radios]:checked").val();
+        var input = $("#table_filter").val();
+        
+        console.log(input);
+        console.log(radio);
 
-        var userData = {
-            search: $("#table-filter").val()
+        const userData = {
+            search: input
             
           };
-        search = $("#table-filter").val();
+        // search = $("#table-filter").val();
 
 
 
 
 
 
-        switch ($("input[name=radios]:checked").val()) {
+        switch (radio) {
             case "Artist":
             $.post("/api/artist", userData, function(data) {
-                console.log(data);
-                // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+                console.log(userData);
                
-                
       
               });
                 break;
             case "Venue":
             $.post("/api/venue", userData, function(data) {
-                console.log(data);
-                // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-                
+                console.log(userData);
                 
       
               });
                 break;
             case "Location":
             $.post("/api/location", userData, function(data) {
-                console.log(data);
-                // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-                
+                console.log(userData + "public");
                 
       
               });
                 break;
             default: 
             $.post("/api/artist", userData, function(data) {
-                console.log(data);
-                // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-               
+                console.log(userData);
                 
                 
               });
