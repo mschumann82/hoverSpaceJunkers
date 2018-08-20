@@ -32,28 +32,28 @@ $(document).ready( function() {
         switch (radio) {
             case "Artist":
             $.post("/api/artist", userData, function(data) {
-                console.log(userData);
+                console.log(data);
                
       
               });
                 break;
             case "Venue":
             $.post("/api/venue", userData, function(data) {
-                console.log(userData);
+                console.log(data);
                 
       
               });
                 break;
             case "Location":
             $.post("/api/location", userData, function(data) {
-                console.log(userData + "public");
+                console.log(data + "public");
                 
       
               });
                 break;
             default: 
             $.post("/api/artist", userData, function(data) {
-                console.log(userData);
+                console.log(data);
                 
                 
               });

@@ -43,7 +43,7 @@ module.exports = function(app) {
   app.post("/api/artist", function(req, res) {
     search = req.body.search;
     console.log(search);
-    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search; 
+    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&countryCode=US&classificationName=music"; 
     
             //this get should work for artist or venue search.
         
@@ -59,7 +59,7 @@ module.exports = function(app) {
   app.post("/api/venue", function(req, res) {
     search = req.body.search;
     console.log(search);
-    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&countryCode=US"; 
+    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&countryCode=US&classificationName=music"; 
     
                     
             request (queryUrl, function(error, response, body) {
@@ -74,7 +74,7 @@ module.exports = function(app) {
   app.post("/api/location", function(req, res) {
     search = req.body.search;
     console.log(search + "api");
-    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&city=" + search + "&countryCode=US"; 
+    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&city=" + search + "&countryCode=US&classificationName=music"; 
     
                     
             request (queryUrl, function(error, response, body) {
