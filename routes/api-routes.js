@@ -87,6 +87,59 @@ module.exports = function(app) {
               }
             })
   });
+
+
+
+
+
+
+  // drafting post to artist and venue table and delete to artist and venue table below.
+  app.post("/api/artist", function(req, res) {
+    
+    db.Artist.create({
+      Artist: req.body.artist, // placeholder
+      foreignKey: req.body.user // placeholder. column name is UserId in created table.
+    }).then(Artist => {
+      res.json(Artist);
+      console.log(res.json(Artist));
+
+    })
+
+  });
+  app.post("/api/venue", function(req, res) {
+    
+    db.Venue.create({
+      Venue: req.body.venue, // placeholder
+      foreignKey: req.body.user // placeholder. column name is UserId in created table.
+    }).then(Venue => {
+      res.json(Venue);
+      console.log(res.json(Venue));
+
+    })
+
+  });
+  // delete posts are probably not accurate yet. will need to see what info we get from the front end to pass into the query.
+  app.delete("/api/artist/:id", function(req, res) {
+    db.Artist.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(Artist => {
+      res.json(Artist);
+      console.log(res.json(Artist));
+    })
+  });
+  app.delete("/api/venue/:id", function(req, res) {
+    db.Venue.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(Venue => {
+      res.json(Venue);
+      console.log(res.json(Venue));
+    })
+  });
+ 
   
 
   
