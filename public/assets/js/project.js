@@ -28,34 +28,64 @@ $(document).ready( function() {
 
 
 
-
+//should be get 
         switch (radio) {
             case "Artist":
             $.post("/api/artist", userData, function(data) {
-                console.log(userData);
-               
-      
+                console.log(data);
+                for(var i = 0; i < data.length; i++) {
+                  console.log(data[i].dates.start.localDate);
+                  console.log(data[i]._embedded.venues[0].name);
+                  console.log(data[i]._embedded.venues[0].city.name);
+                  console.log(data[i]._embedded.venues[0].state.name);
+                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
+                }
+                $("#table-title").append(`<h4>${data[0].name}</h4>`);
+  
+                // id="date"
+
+                // $("#location").text(data._embedded.venues[0].city.name + ", " + data._embedded.venues[0].state.name);
+                // $("#venue").text(data._embedded.venues[0].name);
+                // $("#date").text(data.dates.start.localDate);
+                //display venue, date,and location
+             
               });
                 break;
             case "Venue":
             $.post("/api/venue", userData, function(data) {
-                console.log(userData);
-                
-      
+              console.log(data);
+              for(var i = 0; i < data.length; i++) {
+                console.log(data[i].dates.start.localDate);
+                console.log(data[i].name);
+                console.log(data[i].classifications[0].genre.name);
+                $("#venue-data").append(`<tr><td>${data[i].name}</td><td>${data[i].dates.start.localDate}</td><td>${data[i].classifications[0].genre.name}</td></tr>`)
+              }
+              $("#table-venue-title").append(`<h4>${data[0]._embedded.venues[0].name}</h4>`);
               });
                 break;
             case "Location":
             $.post("/api/location", userData, function(data) {
-                console.log(userData + "public");
-                
-      
+                console.log(data + "public");
+                for(var i = 0; i < data.length; i++) {
+                console.log(data[i].dates.start.localDate);
+                console.log(data[i].name);
+                console.log(data[i]._embedded.venues[0].name);
+                $("#location-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i].name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
+                }
+                // $("#table-location-title").append(`<h4>${data[i]._embedded.venues[0].city.name}</h4>`);
               });
                 break;
             default: 
             $.post("/api/artist", userData, function(data) {
-                console.log(userData);
-                
-                
+                console.log(data);
+                for(var i = 0; i < data.length; i++) {
+                  console.log(data[i].dates.start.localDate);
+                  console.log(data[i]._embedded.venues[0].name);
+                  console.log(data[i]._embedded.venues[0].city.name);
+                  console.log(data[i]._embedded.venues[0].state.name);
+                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
+                }
+                $("#table-title").append(`<h4>${data[0].name}</h4>`);
               });
               break;
         }

@@ -17,7 +17,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" type="text/css" href="./assets/css/styleProfile.css">
-    
+
     <title>HSA2</title>
 </head>
 <style>
@@ -84,18 +84,18 @@
                 <br>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 id="tableTitle" class="panel-title" style="text-align: center;">Artist Name Goes Here</h4>
+                        <h4 id="table-title" class="panel-title" style="text-align: center;">Artist</h4>
 
                         <body>
                             <center>
                                 <table style="width:90%" id="directory" class="table table-bordered table-dark">
                                     <thead>
                                         <tr>
-                                            <th scope="col" id="date">Date of Concert goes here</th>
-                                            <th scope="col" id="location">Location goes here</th>
+                                            <th scope="col" id="date">Date of Concert</th>
+                                            <th scope="col" id="location">Location</th>
                                             <th scope="col" id="venue">Venue</th>
                                         </tr>
-                                        <tbody id=""></tbody>
+                                        <tbody id="artist-data"></tbody>
                                 </table>
                             </center>
                     </div>
@@ -104,18 +104,18 @@
                 <!--Venue search goes here-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 id="tableTitle" class="panel-title" style="text-align: center;">Venue Name Goes Here</h4>
+                        <h4 id="table-venue-title" class="panel-title" style="text-align: center;">Venue</h4>
 
                         <body>
                             <center>
                                 <table style="width:90%" id="directory" class="table table-bordered table-dark">
                                     <thead>
                                         <tr>
-                                            <th scope="col" id="artist">Artist name goes here</th>
-                                            <th scope="col" id="date">Date of Concert goes here</th>
-                                            <th scope="col" id="price">Ticket Price goes here</th>
+                                            <th scope="col" id="artist">Artist </th>
+                                            <th scope="col" id="date">Date of Concert</th>
+                                            <th scope="col" id="price">Genre</th>
                                         </tr>
-                                        <tbody id=""></tbody>
+                                        <tbody id="venue-data"></tbody>
                                 </table>
                             </center>
                     </div>
@@ -124,18 +124,18 @@
                 <!--Location search info goes here-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 id="tableTitle" class="panel-title" style="text-align: center;">City and State Goes Here</h4>
+                        <h4 id="table-location-title" class="panel-title" style="text-align: center;">City and State</h4>
 
                         <body>
                             <center>
                                 <table style="width:90%" id="directory" class="table table-bordered table-dark">
                                     <thead>
                                         <tr>
-                                            <th scope="col-" id="date">Date of Concert goes here</th>
-                                            <th scope="col" id="artist">Artist name goes here</th>
+                                            <th scope="col-" id="date">Date of Concert</th>
+                                            <th scope="col" id="artist">Artist</th>
                                             <th scope="col" id="venue">Venue</th>
                                         </tr>
-                                        <tbody id=""></tbody>
+                                        <tbody id="location-data"></tbody>
                                 </table>
                             </center>
                     </div>
@@ -150,9 +150,15 @@
                         <br>Favorite Artists:
                         <br>
                         <ul>
-                            <li>Twenty One Pilots</li>
-                            <li>Coheed and Cambria</li>
-                            <li>Taking Back Sunday</li>
+                            <li>Twenty One Pilots
+                                <button id="deleteArtist">Remove Band</button>
+                            </li>
+                            <li>Coheed and Cambria
+                                <button id="deleteArtist">Remove Band</button>
+                            </li>
+                            <li>Taking Back Sunday
+                                <button id="deleteArtist">Remove Band</button>
+                            </li>
                         </ul>
                     </div>
                     <!-- Favorite Venue-->
@@ -160,9 +166,15 @@
                         <br>Favorite Venues:
                         <br>
                         <ul>
-                            <li>The Van Buren</li>
-                            <li>Ak Chin Pavilion</li>
-                            <li>Comerica Theatre</li>
+                            <li>The Van Buren
+                                <button id="deleteVenue">Remove Venue</button>
+                            </li>
+                            <li>Ak Chin Pavilion
+                                <button id="deleteVenue">Remove Venue</button>
+                            </li>
+                            <li>Comerica Theatre
+                                <button id="deleteVenue">Remove Venue</button>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -187,15 +199,20 @@
 
 
 
-        <script
- src="https://code.jquery.com/jquery-3.3.1.min.js"
- integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
- crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-            <script src = "assets/js/project.js"></script>
+        <script src="assets/js/project.js"></script>
+
+        <script>
+            var favArtist = [];
+            var favVenue = [];
+
+        </script>
+
         </body>
 
 </html>
