@@ -47,7 +47,22 @@ $(document).ready( function() {
             case "Location":
             $.post("/api/location", userData, function(data) {
                 console.log(data + "project.js");
-                
+                // results(data);
+                for (let i = 0; i < data.length; i++) {
+                            console.log((data)[i]);
+                            $("#results").append(
+                                            '<img src="'+data[i].images[2]+'">'
+                                            +'<p>'+data[i].name+'"/n"'
+                                            +
+                                            data[i]._embedded.venues[0].address+'", "'+
+                                            data[i]._embedded.venues[0].city+'", "'+
+                                            data[i]._embedded.venues[0].state+'"/n"'+
+                                            data[i].dates.start.localTime+'"/n"'+
+                                            data[i].dates.start.localDate+'"/n"'+
+                                            data[i].priceRanges[0].min + "Min Price" + data[i].priceRanges[0].max+ "Max Price" +'"/n"'+
+                                            '<a href="'+ data[i].url+'">'
+                                        );
+                        }//end of for loop
       
               });
                 break;
@@ -118,20 +133,45 @@ $(document).ready( function() {
             });
           }
 
-
-        
-
-
-        
-        
-    
     
       });
 
+    //   function display() {
+
+    //   }
 
 
 
-    
+
+    // function results(data) {
+    //     for (let i = 0; i < data.length; i++) {
+    //         console.log(JSON.parse(data)._embedded.events[i]);
+    //         $("#results").append(
+    //             '<img src="'+(JSON.parse(data)[i].images[2])+'">'
+    //             +'<p>'+JSON.parse(data)[i].name+'"/n"'
+    //             +
+    //             JSON.parse(data)[i]._embedded.venues[0].address+'", "'+
+    //             JSON.parse(data)[i]._embedded.venues[0].city+'", "'+
+    //             JSON.parse(data)[i]._embedded.venues[0].state+'"/n"'+
+    //             JSON.parse(data)[i].dates.start.localTime+'"/n"'+
+    //             JSON.parse(data)[i].dates.start.localDate+'"/n"'+
+    //             JSON.parse(data)[i].priceRanges[0].min + "Min Price" + JSON.parse(data)[i].priceRanges[0].max+ "Max Price" +'"/n"'+
+    //             '<a href="'+JSON.parse(data)[i].url+'">'
+    //         );
+    //         $("#results").append(
+    //             '<img src="'+data[i].images[2]+'">'
+    //             +'<p>'+data[i].name+'"/n"'
+    //             +
+    //             data[i]._embedded.venues[0].address+'", "'+
+    //             data[i]._embedded.venues[0].city+'", "'+
+    //             data[i]._embedded.venues[0].state+'"/n"'+
+    //             data[i].dates.start.localTime+'"/n"'+
+    //             data[i].dates.start.localDate+'"/n"'+
+    //             data[i].priceRanges[0].min + "Min Price" + data[i].priceRanges[0].max+ "Max Price" +'"/n"'+
+    //             '<a href="'+ data[i].url+'">'
+    //         );
+    //       }
+    // }
 
     
 
