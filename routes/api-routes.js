@@ -42,6 +42,7 @@ module.exports = function(app) {
   });
   app.post("/api/artist", function(req, res) {
     search = req.body.search;
+    const array = [];
     console.log(search);
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&countryCode=US&classificationName=music"; 
     
@@ -49,30 +50,40 @@ module.exports = function(app) {
         
             request (queryUrl, function(error, response, body) {
               if (!error && response.statusCode === 200) {
-                for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
+                  
+                 for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
                   console.log(JSON.parse(body)._embedded.events[i]);
-                  // res.json(JSON.parse(body)._embedded.events[i]);
+                  array.push(JSON.parse(body)._embedded.events[i]);
                 }
               }
             })
+            
+            res.json(array);
+            return array;
   });
   app.post("/api/venue", function(req, res) {
     search = req.body.search;
+    const array = [];
     console.log(search);
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&countryCode=US&classificationName=music"; 
     
                     
-            request (queryUrl, function(error, response, body) {
-              if (!error && response.statusCode === 200) {
-                for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
-                  console.log(JSON.parse(body)._embedded.events[i]);
-                  // res.json(JSON.parse(body)._embedded.events[i]);
-                }
-              }
-            })
+    request (queryUrl, function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+          
+         for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
+          console.log(JSON.parse(body)._embedded.events[i]);
+          array.push(JSON.parse(body)._embedded.events[i]);
+        }
+      }
+    })
+    
+    res.json(array);
+    return array;
   });
   app.post("/api/location", function(req, res) {
     search = req.body.search;
+    const array = [];
     console.log(search + "api");
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&city=" + search + "&countryCode=US&classificationName=music"; 
     
@@ -82,10 +93,13 @@ module.exports = function(app) {
                   
                  for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
                   console.log(JSON.parse(body)._embedded.events[i]);
-                  // res.json(JSON.parse(body)._embedded.events[i]);
+                  array.push(JSON.parse(body)._embedded.events[i]);
                 }
               }
             })
+            
+            res.json(array);
+            return array;
   });
 
 
