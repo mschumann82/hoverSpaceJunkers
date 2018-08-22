@@ -13,9 +13,10 @@ module.exports = function(sequelize, DataTypes) {
       
       Artist.belongsTo(models.user, {
         foreignKey: {
-          allowNull: false
+          allowNull: false,
+          unique: true
         },
-        unique: true
+        // unique: true
       });
     };
   

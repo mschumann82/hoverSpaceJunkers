@@ -48,7 +48,7 @@ $(document).ready( function() {
                   console.log(data[i]._embedded.venues[0].state.name);
                   $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
                 }
-                $("#table-title").append(`<h4>${data[0]._embedded.attractions[0].name}<button id="favArtist"; style="margin-left: 10px">Add to favorites</button></h4>`);
+                $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist"; style="margin-left: 10px">Add to favorites</button>`);
               });
                 break;
 
@@ -66,7 +66,7 @@ $(document).ready( function() {
                 console.log(data[i].classifications[0].genre.name);
                 $("#venue-data").append(`<tr><td>${data[i].name}</td><td>${data[i].dates.start.localDate}</td><td>${data[i].classifications[0].genre.name}</td></tr>`);
               }
-              $("#table-venue-title").append(`<h4>${data[0]._embedded.venues[0].name}<button id="favVenue"; style="margin-left: 10px">Add to favorites</button></h4>`);
+              $("#table-venue-title").append(`<h4 id = "ven-name">${data[0]._embedded.venues[0].name}</h4><button id="favVenue"; style="margin-left: 10px">Add to favorites</button>`);
 
               });
                 break;
@@ -128,7 +128,7 @@ $(document).ready( function() {
 
         $(document).on("click", "#favArtist", insertArtist);
           
-          console.log(art);
+          
         function insertArtist(event) {
           const art = $("#art-name").text();
             event.preventDefault();
@@ -137,20 +137,21 @@ $(document).ready( function() {
                userId: globalId
             };
             console.log(favorite);
-            $.post("/api/favartist", favorite, function() {});
-            // $newItemInput.val(""); 
+            $.post("/api/favartist", favorite, getArtists);
+            console.log("post favArtist");
           }
         // });
         $(document).on("click", "#favVenue", insertVenue);
         function insertVenue(event) {
+            const ven = $("#ven-name").text();
             event.preventDefault();
             let favorite = {
-            venue: $("#table-venue-title").val(),
+            venue: ven,
             userId: globalId
             };
-        
+            console.log(favorite);
             $.post("/api/favvenue", favorite, getVenues);
-            // $newItemInput.val(""); 
+            console.log("post favVenue");
           }
         // });
         $(document).on("click", ".venue-item", deleteVenue);
@@ -167,7 +168,7 @@ $(document).ready( function() {
         function getVenues() {
             $.get("/api/favvenue", function(data) {
               venues = data;
-              
+              console.log(venues);
             });
           }
           function deleteArtist(event) {
@@ -181,7 +182,7 @@ $(document).ready( function() {
         function getArtists() {
             $.get("/api/favartist", function(data) {
               artists = data;
-              
+              console.log(artists);
             });
           }
 

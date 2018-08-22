@@ -50,7 +50,7 @@ module.exports = function(app) {
     search = req.body.search;
    
     console.log(search + "search");
-    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&countryCode=US&classificationName=music"; 
+    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
     
             //this get should work for artist or venue search.
         var apiData = [];
@@ -72,7 +72,7 @@ module.exports = function(app) {
     search = req.body.search;
    
     console.log(search);
-    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&countryCode=US&classificationName=music"; 
+    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
     
 
         var apiData = [];   
@@ -91,7 +91,7 @@ module.exports = function(app) {
     search = req.body.search;
     
     console.log(search + "api");
-    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&city=" + search + "&countryCode=US&classificationName=music"; 
+    let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&city=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
     
           var apiData = [];           
             request (queryUrl, function(error, response, body) {
@@ -117,7 +117,7 @@ module.exports = function(app) {
 
   // drafting post to artist and venue table and delete to artist and venue table below.
   app.post("/api/favartist", function(req, res) {
-    console.log(req.body, 'req.body');
+    console.log(req.body, 'req for artist');
     db.Artist.create({
       artist: req.body.artist, // placeholder
       userId: req.body.userId // placeholder. column name is UserId in created table.
@@ -129,10 +129,10 @@ module.exports = function(app) {
 
   });
   app.post("/api/favvenue", function(req, res) {
-    
+    console.log(req.body, 'req for venue');
     db.Venue.create({
       venue: req.body.venue, // placeholder
-      userId: req.body.userID // placeholder. column name is UserId in created table.
+      userId: req.body.userId // placeholder. column name is UserId in created table.
     }).then(Venue => {
       res.json(Venue);
       console.log(res.json(Venue));

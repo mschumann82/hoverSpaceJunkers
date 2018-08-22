@@ -1,7 +1,7 @@
 
 module.exports = function(sequelize, Sequelize) {
 
-	var User = sequelize.define('user', {
+	const User = sequelize.define('user', {
 		id: { autoIncrement: true, primaryKey: true, type: Sequelize.INTEGER},
 		username: {type:Sequelize.STRING,allowNull: false, validate: { len: [1] }},
 		city : {type:Sequelize.STRING, allowNull: false, validate: { len: [1] }},
@@ -13,13 +13,13 @@ module.exports = function(sequelize, Sequelize) {
 
 User.associate = function(models) {
       // Associating Users with other tables
-      
-      User.hasMany(models.Artist, {
-        onDelete: "cascade"
-      });
       User.hasMany(models.Venue, {
         onDelete: "cascade"
       });
+      User.hasMany(models.Artist, {
+        onDelete: "cascade"
+      });
+      
     };
 
 	return User;
