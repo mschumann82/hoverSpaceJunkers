@@ -57,7 +57,8 @@ module.exports = function(app) {
               }
               res.json(apiData);
             })
-  });
+          });
+       
   app.post("/api/venue", function(req, res) {
     search = req.body.search;
     console.log(search);
