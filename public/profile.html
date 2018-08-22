@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/styleProfile.css">
+
+    <title>HSA2</title>
+</head>
+<style>
+</style>
+
+<body>
+    <!-- Start of navbar-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a id="hsj" class="navbar-brand" href="#">HoverSpaceJunkers</a>
+            </div>
+            <!-- Category button-->
+            <div id="categoryBtn" class="row searchFilter">
+                <div id="searchBar" class="input-group">
+                    <input id="table_filter" type="text" class="form-control" aria-label="Text input with segmented button dropdown">
+                    <div class="input-group-btn">
+                        <button type="button" id="categoryBtn" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <span class="label-icon"></span>Category</span>
+                            <span class="caret">&nbsp;</span>
+                        </button>
+                        <!-- Drop down menu items-->
+                        <div class="dropdown-menu">
+                            <ul class="category_filters">
+                                <li>
+                                    <input type="radio" name="radios" id="Artist" value="Artist">
+                                    <label class="category-label" for="Artist">Artist</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="radios" id="Venue" value="Venue">
+                                    <label class="category-label" for="Venue">Venue</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="radios" id="Location" value="Location">
+                                    <label class="category-label" for="Location">Location</label>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- Search button-->
+                        <button id="searchBtn" type="button" class="btn btn-secondary btn-search">
+                            <span class="glyphicon glyphicon-search">&nbsp;</span>
+                            <span class="label-icon">Search</span>
+                        </button>
+                        <!-- Sign out button-->
+                        <button id="signOut" type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-log-out"></span> Log out
+                        </button>
+                    </div>
+                </div>
+                </form>
+            </div>
+    </nav>
+
+
+
+    <!-- Container -->
+    <div id="titleBox" class="container-fluid" style="background-color: #a3acba; padding: 0%; margin: 0%">
+        <div class="row">
+            <!-- Main table display-->
+            <div class="col-md-9">
+                <!--Artist search info-->
+                <br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 id="table-title" class="panel-title" style="text-align: center;">Artist</h4>
+
+                        <body>
+                            <center>
+                                <table style="width:90%" id="directory" class="table table-bordered table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" id="date">Date of Concert</th>
+                                            <th scope="col" id="location">Location</th>
+                                            <th scope="col" id="venue">Venue</th>
+                                        </tr>
+                                        <tbody id="artist-data"></tbody>
+                                </table>
+                            </center>
+                    </div>
+                </div>
+
+                <!--Venue search goes here-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 id="table-venue-title" class="panel-title" style="text-align: center;">Venue</h4>
+
+                        <body>
+                            <center>
+                                <table style="width:90%" id="directory" class="table table-bordered table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" id="artist">Artist </th>
+                                            <th scope="col" id="date">Date of Concert</th>
+                                            <th scope="col" id="price">Genre</th>
+                                        </tr>
+                                        <tbody id="venue-data"></tbody>
+                                </table>
+                            </center>
+                    </div>
+                </div>
+
+                <!--Location search info goes here-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 id="table-location-title" class="panel-title" style="text-align: center;">City and State</h4>
+
+                        <body>
+                            <center>
+                                <table style="width:90%" id="directory" class="table table-bordered table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col-" id="date">Date of Concert</th>
+                                            <th scope="col" id="artist">Artist</th>
+                                            <th scope="col" id="venue">Venue</th>
+                                        </tr>
+                                        <tbody id="location-data"></tbody>
+                                </table>
+                            </center>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Favorite Artist-->
+            <div class="col-md-3">
+                <div class="row">
+                    <div id="Artist" class="col-md-12" style="height: 450px; background-color:#a3acba">
+                        <br>Favorite Artists:
+                        <br>
+                        <ul>
+                            <li>Twenty One Pilots
+                                <button id="deleteArtist">Remove Band</button>
+                            </li>
+                            <li>Coheed and Cambria
+                                <button id="deleteArtist">Remove Band</button>
+                            </li>
+                            <li>Taking Back Sunday
+                                <button id="deleteArtist">Remove Band</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Favorite Venue-->
+                    <div id="Venues" class="col-md-12" style="height: 450px;background-color:#a3acba">
+                        <br>Favorite Venues:
+                        <br>
+                        <ul>
+                            <li>The Van Buren
+                                <button id="deleteVenue">Remove Venue</button>
+                            </li>
+                            <li>Ak Chin Pavilion
+                                <button id="deleteVenue">Remove Venue</button>
+                            </li>
+                            <li>Comerica Theatre
+                                <button id="deleteVenue">Remove Venue</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <footer class="footer" style="position: absolute; bottom: 0; margin-bottom: 3px; width: 100%; height: 60px; line-height: 60px; background-color:black; text-align: center; border-top:5px solid fcf8f5;">
+            <div class="container">
+                <span style=" color: #fcf8f5">Copyright ©</span>
+            </div>
+        </footer>
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        <script src="assets/js/project.js"></script>
+
+        <script>
+            var favArtist = [];
+            var favVenue = [];
+
+        </script>
+
+        </body>
+
+</html>
