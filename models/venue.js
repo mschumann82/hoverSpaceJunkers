@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
   
     Venue.associate = function(models) {
       
-      Venue.belongsTo(models.User, {
+      Venue.belongsTo(models.user, {
         foreignKey: {
           allowNull: false
         },
