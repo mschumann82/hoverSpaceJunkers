@@ -164,6 +164,46 @@ module.exports = function(app) {
  
   
 
+
+// draft gets for tables
+app.get("/api/art-table/:id", function(req, res) {
+  // 2; Add a join to include all of the Author's Posts here
+  db.Artist.findAll({
+    where: {
+      userId: req.params.id
+    },
+    
+  }).then(function(dbArtists) {
+    res.json(dbArtists);
+  });
+});
+
+app.get("/api/ven-table/:id", function(req, res) {
+  // 2; Add a join to include all of the Author's Posts here
+  db.Venue.findAll({
+    where: {
+      userId: req.params.id
+    },
+    
+  }).then(function(dbVenues) {
+    res.json(dbVenues);
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 } // end of modules export

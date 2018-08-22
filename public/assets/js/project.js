@@ -7,6 +7,28 @@ $(document).ready( function() {
   $.get("/session", function(data) {
      globalId = data.id;
      console.log(globalId + " id has value");
+     $.get("/api/art-table/" + globalId, function(data) {
+      $("artList").empty();
+      console.log(data);
+
+      for (let i = 0; i < data.length; i++) {
+      
+        $("#artList").append("<ul><li><button class = 'artist-item'>X</button>" + data[i].artist + "</li></ul>");
+        
+      }
+      
+    });
+    $.get("/api/ven-table/" + globalId, function(data) {
+      $("venList").empty();
+      console.log(data);
+
+      for (let i = 0; i < data.length; i++) {
+      
+        $("#venList").append("<ul><li><button class = 'venue-item'>X</button>" + data[i].venue + "</li></ul>");
+        
+      }
+      
+    });
      
   });
     
@@ -17,6 +39,9 @@ $(document).ready( function() {
         console.log("clicked");
         // Don't refresh the page!
         event.preventDefault();
+              $("#artist-data").empty();
+              $("#venue-data").empty();
+              $("#location-data").empty();
         var radio = $("input[name=radios]:checked").val();
         var input = $("#table_filter").val();
         
@@ -37,9 +62,7 @@ $(document).ready( function() {
         switch (radio) {
             case "Artist":
             $.post("/api/artist", userData, function(data) {
-              $("#artist-data").empty();
-              $("#venue-data").empty();
-              $("#location-data").empty();
+              
                 console.log(data);
                 for(var i = 0; i < data.length; i++) {
                   console.log(data[i].dates.start.localDate);
@@ -56,9 +79,7 @@ $(document).ready( function() {
 //displays Venue info into table
             case "Venue":
             $.post("/api/venue", userData, function(data) {
-              $("#venue-data").empty();
-              $("#artist-data").empty();
-              $("#location-data").empty();
+              
               console.log(data);
               for(var i = 0; i < data.length; i++) {
                 console.log(data[i].dates.start.localDate);
@@ -75,9 +96,7 @@ $(document).ready( function() {
 //displays location info into table
             case "Location":
             $.post("/api/location", userData, function(data) {
-              $("#venue-data").empty();
-              $("#artist-data").empty();
-              $("#location-data").empty();
+              
                 console.log(data + "public");
                 for(var i = 0; i < data.length; i++) {
                 console.log(data[i].dates.start.localDate);
@@ -162,30 +181,59 @@ $(document).ready( function() {
             let id = $(this).data("id");
             $.ajax({
               method: "DELETE",
-              url: "/api/favvenue/" + id
+              url: "/api/ven-table/" + id
             }).then(getVenues);
           }
         function getVenues() {
-            $.get("/api/favvenue", function(data) {
-              venues = data;
-              console.log(venues);
-            });
+          $.get("/api/ven-table/" + globalId, function(data) {
+      
+            console.log(data);
+      
+            for (let i = 0; i < data.length; i++) {
+            
+              $("#venList").append("<ul><li><button class = 'venue-item'>X</button>" + data[i].venue + "</li></ul>");
+              
+            }
+            
+          });
           }
           function deleteArtist(event) {
             event.stopPropagation();
             let id = $(this).data("id");
             $.ajax({
               method: "DELETE",
-              url: "/api/favartist/" + id
+              url: "/api/art-table/" + id
             }).then(getArtists);
           }
         function getArtists() {
-            $.get("/api/favartist", function(data) {
-              artists = data;
-              console.log(artists);
-            });
+          $.get("/api/art-table/" + globalId, function(data) {
+      
+            console.log(data);
+      
+            for (let i = 0; i < data.length; i++) {
+            
+              $("#artList").append("<ul><li><button class = 'artist-item'>X</button>" + data[i].artist + "</li></ul>");
+              
+            }
+            
+          });
           }
 
+          
+
+          // getArtists();
+          // getVenues();
+
+          // function artTable(artists) {
+          //   for(let i = 0; i < artists.artists.length; i++) {
+              
+          //     $("#artList").append("<ul><li>"+artists.artists[i].artist+"</li></ul>");
+          //   }
+            
+
+          
+          // }
+          
     
       });
 
