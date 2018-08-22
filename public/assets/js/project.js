@@ -13,7 +13,7 @@ $(document).ready( function() {
 
       for (let i = 0; i < data.length; i++) {
       
-        $("#artList").append("<ul><li><button class = 'artist-item'>X</button>" + data[i].artist + "</li></ul>");
+        $("#artList").append("<ul><li><button class = 'artist-item' value ="+data[i].id+">X</button>" + data[i].artist + "</li></ul>");
         
       }
       
@@ -24,7 +24,7 @@ $(document).ready( function() {
 
       for (let i = 0; i < data.length; i++) {
       
-        $("#venList").append("<ul><li><button class = 'venue-item'>X</button>" + data[i].venue + "</li></ul>");
+        $("#venList").append("<ul><li><button class = 'venue-item' value ="+data[i].id+">X</button>" + data[i].venue + "</li></ul>");
         
       }
       
@@ -39,6 +39,9 @@ $(document).ready( function() {
         console.log("clicked");
         // Don't refresh the page!
         event.preventDefault();
+        $("#table-title").empty();
+        $("#table-venue-title").empty();
+        $("#table-location-title").empty();
               $("#artist-data").empty();
               $("#venue-data").empty();
               $("#location-data").empty();
@@ -173,47 +176,52 @@ $(document).ready( function() {
             console.log("post favVenue");
           }
         // });
-        $(document).on("click", ".venue-item", deleteVenue);
-        $(document).on("click", ".artist-item", deleteArtist);
+        // $('body').on("click", ".venue-item", deleteVenue);
+        // $('body').on("click", ".artist-item", deleteArtist);
 
-        function deleteVenue(event) {
-            event.stopPropagation();
-            let id = $(this).data("id");
-            $.ajax({
-              method: "DELETE",
-              url: "/api/ven-table/" + id
-            }).then(getVenues);
-          }
+        // function deleteVenue(event) {
+        //   // event.preventDefault();
+        //     console.log("delete venue clicked");
+        //     let id = $(this).data("id");
+
+        //     $.ajax({
+        //       method: "DELETE",
+        //       url: "/api/ven-table/" + id
+        //     }).then(getVenues);
+        //   }
         function getVenues() {
+          $("#venList").empty();
           $.get("/api/ven-table/" + globalId, function(data) {
       
             console.log(data);
       
             for (let i = 0; i < data.length; i++) {
             
-              $("#venList").append("<ul><li><button class = 'venue-item'>X</button>" + data[i].venue + "</li></ul>");
-              
+              $("#venList").append("<ul><li><button class = 'venue-item' value ="+data[i].id+">X</button>" + data[i].venue + "</li></ul>");
+              // $("venue-item").data("number", {id: data[i].id});
             }
             
           });
           }
-          function deleteArtist(event) {
-            event.stopPropagation();
-            let id = $(this).data("id");
-            $.ajax({
-              method: "DELETE",
-              url: "/api/art-table/" + id
-            }).then(getArtists);
-          }
+          // function deleteArtist(event) {
+          //   // event.preventDefault();
+          //   console.log("delete artist clicked");
+          //   let id = $(this).data("id");
+          //   $.ajax({
+          //     method: "DELETE",
+          //     url: "/api/art-table/" + id
+          //   }).then(getArtists);
+          // }
         function getArtists() {
+          $("#artList").empty();
           $.get("/api/art-table/" + globalId, function(data) {
       
             console.log(data);
       
             for (let i = 0; i < data.length; i++) {
             
-              $("#artList").append("<ul><li><button class = 'artist-item'>X</button>" + data[i].artist + "</li></ul>");
-              
+              $("#artList").append("<ul><li><button class = 'artist-item' value ="+data[i].id+">X</button>" + data[i].artist + "</li></ul>");
+              // $("artist-item").data("number", {id: data[i].id});
             }
             
           });
@@ -221,25 +229,35 @@ $(document).ready( function() {
 
           
 
-          // getArtists();
-          // getVenues();
-
-          // function artTable(artists) {
-          //   for(let i = 0; i < artists.artists.length; i++) {
-              
-          //     $("#artList").append("<ul><li>"+artists.artists[i].artist+"</li></ul>");
-          //   }
-            
-
-          
-          // }
           
     
       });
 
     
 
-
+      $( "body" ).on( "click", ".artist-item", function() {
+        console.log("delete artist clicked");
+            // let id = $(this).data("id");
+            let id = $(this).val();
+            // let id = $((this).data("number").id);
+            console.log(id);
+            $.ajax({
+              method: "DELETE",
+              url: "/api/art-table/" + id
+            }).then(getArtists);
+      });
+      $( "body" ).on( "click", ".venue-item", function() {
+            console.log("delete venue clicked");
+            // let id = $(this).data("id");
+            let id = $(this).val();
+            // let id = $((this).data("number").id);
+            console.log(id);
+            $.ajax({
+              method: "DELETE",
+              url: "/api/ven-table/" + id
+            }).then(getVenues);
+      });
+      
 
 
 

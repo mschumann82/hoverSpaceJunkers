@@ -141,7 +141,7 @@ module.exports = function(app) {
 
   });
   // delete posts are probably not accurate yet. will need to see what info we get from the front end to pass into the query.
-  app.delete("/api/favartist/:id", function(req, res) {
+  app.delete("/api/art-table/:id", function(req, res) {
     db.Artist.destroy({
       where: {
         id: req.params.id
@@ -151,7 +151,7 @@ module.exports = function(app) {
       console.log(res.json(Artist));
     })
   });
-  app.delete("/api/favvenue/:id", function(req, res) {
+  app.delete("/api/ven-table/:id", function(req, res) {
     db.Venue.destroy({
       where: {
         id: req.params.id
