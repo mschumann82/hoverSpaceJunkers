@@ -32,6 +32,7 @@ $(document).ready( function() {
         switch (radio) {
             case "Artist":
             $.post("/api/artist", userData, function(data) {
+
                 console.log(data);
                 for(var i = 0; i < data.length; i++) {
                   console.log(data[i].dates.start.localDate);
@@ -48,6 +49,7 @@ $(document).ready( function() {
 //displays Venue info into table
             case "Venue":
             $.post("/api/venue", userData, function(data) {
+
               console.log(data);
               for(var i = 0; i < data.length; i++) {
                 console.log(data[i].dates.start.localDate);
@@ -56,6 +58,7 @@ $(document).ready( function() {
                 $("#venue-data").append(`<tr><td>${data[i].name}</td><td>${data[i].dates.start.localDate}</td><td>${data[i].classifications[0].genre.name}</td></tr>`);
               }
               $("#table-venue-title").append(`<h4>${data[0]._embedded.venues[0].name}<button id="favVenue"; style="margin-left: 10px">Add to favorites</button></h4>`);
+
               });
                 break;
 
@@ -63,6 +66,7 @@ $(document).ready( function() {
 //displays location info into table
             case "Location":
             $.post("/api/location", userData, function(data) {
+              
                 console.log(data + "public");
                 for(var i = 0; i < data.length; i++) {
                 console.log(data[i].dates.start.localDate);
@@ -71,6 +75,7 @@ $(document).ready( function() {
                 $("#location-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i].name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
                 }
                 // $("#table-location-title").append(`<h4>${data[i]._embedded.venues[0].city.name}</h4>`);
+
               });
                 break;
 
@@ -78,6 +83,7 @@ $(document).ready( function() {
 //Default Artist Case
             default: 
             $.post("/api/artist", userData, function(data) {
+
                 console.log(data);
                 for(var i = 0; i < data.length; i++) {
                   console.log(data[i].dates.start.localDate);
@@ -87,6 +93,7 @@ $(document).ready( function() {
                   $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
                 }
                 $("#table-title").append(`<h4>${data[0].name}<button id="favArtist"; style="margin-left: 10px">Add to favorites</button></h4>`);
+
               });
               break;
         }
@@ -149,20 +156,45 @@ $(document).ready( function() {
             });
           }
 
-
-        
-
-
-        
-        
-    
     
       });
 
+    //   function display() {
+
+    //   }
 
 
 
-    
+
+    // function results(data) {
+    //     for (let i = 0; i < data.length; i++) {
+    //         console.log(JSON.parse(data)._embedded.events[i]);
+    //         $("#results").append(
+    //             '<img src="'+(JSON.parse(data)[i].images[2])+'">'
+    //             +'<p>'+JSON.parse(data)[i].name+'"/n"'
+    //             +
+    //             JSON.parse(data)[i]._embedded.venues[0].address+'", "'+
+    //             JSON.parse(data)[i]._embedded.venues[0].city+'", "'+
+    //             JSON.parse(data)[i]._embedded.venues[0].state+'"/n"'+
+    //             JSON.parse(data)[i].dates.start.localTime+'"/n"'+
+    //             JSON.parse(data)[i].dates.start.localDate+'"/n"'+
+    //             JSON.parse(data)[i].priceRanges[0].min + "Min Price" + JSON.parse(data)[i].priceRanges[0].max+ "Max Price" +'"/n"'+
+    //             '<a href="'+JSON.parse(data)[i].url+'">'
+    //         );
+    //         $("#results").append(
+    //             '<img src="'+data[i].images[2]+'">'
+    //             +'<p>'+data[i].name+'"/n"'
+    //             +
+    //             data[i]._embedded.venues[0].address+'", "'+
+    //             data[i]._embedded.venues[0].city+'", "'+
+    //             data[i]._embedded.venues[0].state+'"/n"'+
+    //             data[i].dates.start.localTime+'"/n"'+
+    //             data[i].dates.start.localDate+'"/n"'+
+    //             data[i].priceRanges[0].min + "Min Price" + data[i].priceRanges[0].max+ "Max Price" +'"/n"'+
+    //             '<a href="'+ data[i].url+'">'
+    //         );
+    //       }
+    // }
 
     
 
