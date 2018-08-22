@@ -13,7 +13,7 @@ module.exports = function(app) {
 
   // GET route for getting all of the users
   app.get("/api/users", function(req, res) {
-    db.User.findAll({})
+    db.user.findAll({})
       .then(function(dbUser) {
         res.json(dbUser);
       });
@@ -33,7 +33,7 @@ module.exports = function(app) {
   });
   app.get("/api/users/:id", function(req, res) {
     // 2; Add a join to include all of the Author's Posts here
-    db.User.findOne({
+    db.user.findOne({
       where: {
         id: req.params.id
       },

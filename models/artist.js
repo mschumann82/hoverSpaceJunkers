@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
   
     Artist.associate = function(models) {
       
-      Artist.belongsTo(models.User, {
+      Artist.belongsTo(models.user, {
         foreignKey: {
           allowNull: false
         },

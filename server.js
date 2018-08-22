@@ -8,6 +8,9 @@ require('dotenv').config()
 
 const app = express();
 
+var passport   = require('passport');
+var session    = require('express-session');
+
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
@@ -17,11 +20,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
-// Set Handlebars.
-const exphbs = require("express-handlebars");
+// For Passport
+app.use(session({ secret: 'aG92ZX',resave: true, saveUninitialized:true})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+	
+// Auth Routes
+var authRoute = require('./routes/auth-routes.js')(app,passport,express);	
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+// Load passport strategies
+require('./config/passport/passport.js')(passport,db.user);
 
 // Import routes and give the server access to them.
 require("./routes/api-routes.js")(app);
