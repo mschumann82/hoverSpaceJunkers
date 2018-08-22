@@ -1,4 +1,30 @@
+function toggleTables(radio) {
+  $("#artistDiv").show();
+  $("#venueDiv").show();
+  $("#locationDiv").show();
 
+  $("#venue-data").empty();
+  $("#artist-data").empty();
+  $("#location-data").empty();
+  $("#table-venue-title").empty();
+  $("#table-title").empty();
+  $("#location-data").empty();
+
+
+  if (radio==="Artist") {
+  $("#venueDiv").hide();
+  $("#locationDiv").hide();
+  } else if (radio==="Venue") {
+  $("#artistDiv").hide();
+  $("#locationDiv").hide();
+} else if (radio==="Location") {
+  $("#artistDiv").hide();
+  $("#venueDiv").hide();
+} else {
+  $("#venueDiv").hide();
+  $("#locationDiv").hide()
+}
+}
 // var search;
 
 $(document).ready( function() {
@@ -9,18 +35,18 @@ $(document).ready( function() {
    
 
     $("#searchBtn").on("click", function(event) {
+      
         console.log("clicked");
         // Don't refresh the page!
         event.preventDefault();
         var radio = $("input[name=radios]:checked").val();
         var input = $("#table_filter").val();
-        
+        toggleTables(radio)
         console.log(input);
         console.log(radio);
 
         const userData = {
             search: input
-            
           };
         // search = $("#table-filter").val();
 
@@ -39,7 +65,7 @@ $(document).ready( function() {
                   console.log(data[i]._embedded.venues[0].name);
                   console.log(data[i]._embedded.venues[0].city.name);
                   console.log(data[i]._embedded.venues[0].state.name);
-                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
+                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}.</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
                 }
                 $("#table-title").append(`<h4>${data[0]._embedded.attractions[0].name}<button id="favArtist"; style="margin-left: 10px">Add to favorites</button></h4>`);
               });
@@ -92,7 +118,7 @@ $(document).ready( function() {
                   console.log(data[i]._embedded.venues[0].state.name);
                   $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
                 }
-                $("#table-title").append(`<h4>${data[0].name}<button id="favArtist"; style="margin-left: 10px">Add to favorites</button></h4>`);
+                $("#table-title").append(`<h4>${data[0]._embedded.attractions[0].name}<button id="favArtist"; style="margin-left: 10px">Add to favorites</button></h4>`);
 
               });
               break;
