@@ -1,9 +1,14 @@
 
-// var search;
+var globalId;
 
 $(document).ready( function() {
+  
 
-
+  $.get("/session", function(data) {
+     globalId = data.id;
+     console.log(globalId + " id has value");
+     
+  });
     
 
    
@@ -32,7 +37,9 @@ $(document).ready( function() {
         switch (radio) {
             case "Artist":
             $.post("/api/artist", userData, function(data) {
-
+              $("#artist-data").empty();
+              $("#venue-data").empty();
+              $("#location-data").empty();
                 console.log(data);
                 for(var i = 0; i < data.length; i++) {
                   console.log(data[i].dates.start.localDate);
@@ -49,7 +56,9 @@ $(document).ready( function() {
 //displays Venue info into table
             case "Venue":
             $.post("/api/venue", userData, function(data) {
-
+              $("#venue-data").empty();
+              $("#artist-data").empty();
+              $("#location-data").empty();
               console.log(data);
               for(var i = 0; i < data.length; i++) {
                 console.log(data[i].dates.start.localDate);
@@ -66,7 +75,9 @@ $(document).ready( function() {
 //displays location info into table
             case "Location":
             $.post("/api/location", userData, function(data) {
-              
+              $("#venue-data").empty();
+              $("#artist-data").empty();
+              $("#location-data").empty();
                 console.log(data + "public");
                 for(var i = 0; i < data.length; i++) {
                 console.log(data[i].dates.start.localDate);
@@ -92,7 +103,7 @@ $(document).ready( function() {
                   console.log(data[i]._embedded.venues[0].state.name);
                   $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
                 }
-                $("#table-title").append(`<h4>${data[0].name}<button id="favArtist"; style="margin-left: 10px">Add to favorites</button></h4>`);
+                $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist"; style="margin-left: 10px">Add to favorites</button>`);
 
               });
               break;
@@ -100,27 +111,45 @@ $(document).ready( function() {
 
 // anything below this line is a draft of what the posts and deletes will be. We still need to populate the page and obtain values.
 
-        $(document).on("click", ".favorite-artist", insertArtist);
+  // $("#searchBtn").on("click", function(event) {
+  // console.log("clicked");
+  // // Don't refresh the page!
+  // event.preventDefault();
+  // var radio = $("input[name=radios]:checked").val();
+  // var input = $("#table_filter").val();
+  
+  // console.log(input);
+  // console.log(radio);
+
+  // const userData = {
+  //     search: input
+      
+  //   };
+
+        $(document).on("click", "#favArtist", insertArtist);
+          
+          console.log(art);
         function insertArtist(event) {
+          const art = $("#art-name").text();
             event.preventDefault();
             let favorite = {
-            //   artist: $artistName.val().trim(), need to confirm selectors.
-            //   userId: $userId.val()
+               artist: art, //need to confirm selectors.
+               userId: globalId
             };
-        
-            $.post("/api/artist", favorite, getArtists);
+            console.log(favorite);
+            $.post("/api/favartist", favorite, function() {});
             // $newItemInput.val(""); 
           }
         // });
-        $(document).on("click", ".favorite-venue", insertVenue);
+        $(document).on("click", "#favVenue", insertVenue);
         function insertVenue(event) {
             event.preventDefault();
             let favorite = {
-            //   venue: $venueName.val().trim(), need to confirm selectors.
-            //   userId: $userId.val()
+            venue: $("#table-venue-title").val(),
+            userId: globalId
             };
         
-            $.post("/api/venue", favorite, getVenues);
+            $.post("/api/favvenue", favorite, getVenues);
             // $newItemInput.val(""); 
           }
         // });
@@ -132,11 +161,11 @@ $(document).ready( function() {
             let id = $(this).data("id");
             $.ajax({
               method: "DELETE",
-              url: "/api/venue/" + id
+              url: "/api/favvenue/" + id
             }).then(getVenues);
           }
         function getVenues() {
-            $.get("/api/venue", function(data) {
+            $.get("/api/favvenue", function(data) {
               venues = data;
               
             });
@@ -146,55 +175,18 @@ $(document).ready( function() {
             let id = $(this).data("id");
             $.ajax({
               method: "DELETE",
-              url: "/api/artist/" + id
+              url: "/api/favartist/" + id
             }).then(getArtists);
           }
         function getArtists() {
-            $.get("/api/artist", function(data) {
-              venues = data;
+            $.get("/api/favartist", function(data) {
+              artists = data;
               
             });
           }
 
     
       });
-
-    //   function display() {
-
-    //   }
-
-
-
-
-    // function results(data) {
-    //     for (let i = 0; i < data.length; i++) {
-    //         console.log(JSON.parse(data)._embedded.events[i]);
-    //         $("#results").append(
-    //             '<img src="'+(JSON.parse(data)[i].images[2])+'">'
-    //             +'<p>'+JSON.parse(data)[i].name+'"/n"'
-    //             +
-    //             JSON.parse(data)[i]._embedded.venues[0].address+'", "'+
-    //             JSON.parse(data)[i]._embedded.venues[0].city+'", "'+
-    //             JSON.parse(data)[i]._embedded.venues[0].state+'"/n"'+
-    //             JSON.parse(data)[i].dates.start.localTime+'"/n"'+
-    //             JSON.parse(data)[i].dates.start.localDate+'"/n"'+
-    //             JSON.parse(data)[i].priceRanges[0].min + "Min Price" + JSON.parse(data)[i].priceRanges[0].max+ "Max Price" +'"/n"'+
-    //             '<a href="'+JSON.parse(data)[i].url+'">'
-    //         );
-    //         $("#results").append(
-    //             '<img src="'+data[i].images[2]+'">'
-    //             +'<p>'+data[i].name+'"/n"'
-    //             +
-    //             data[i]._embedded.venues[0].address+'", "'+
-    //             data[i]._embedded.venues[0].city+'", "'+
-    //             data[i]._embedded.venues[0].state+'"/n"'+
-    //             data[i].dates.start.localTime+'"/n"'+
-    //             data[i].dates.start.localDate+'"/n"'+
-    //             data[i].priceRanges[0].min + "Min Price" + data[i].priceRanges[0].max+ "Max Price" +'"/n"'+
-    //             '<a href="'+ data[i].url+'">'
-    //         );
-    //       }
-    // }
 
     
 

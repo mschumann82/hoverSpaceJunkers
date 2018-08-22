@@ -9,7 +9,7 @@ const db = require("../models");
 // =============================================================
 module.exports = function(app) {
 
-  var send = {};
+  // var send = {};
 
   // GET route for getting all of the users
   app.get("/api/users", function(req, res) {
@@ -42,10 +42,14 @@ module.exports = function(app) {
       res.json(dbUser);
     });
   });
+  
+
+
+
   app.post("/api/artist", function(req, res) {
     search = req.body.search;
    
-    console.log(search);
+    console.log(search + "search");
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&countryCode=US&classificationName=music"; 
     
             //this get should work for artist or venue search.
@@ -54,7 +58,7 @@ module.exports = function(app) {
               // console.log(body);
               if (!error && response.statusCode === 200) {
                 for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
-                  console.log(JSON.parse(body)._embedded.events[i]);
+                  // console.log(JSON.parse(body)._embedded.events[i]);
                   apiData.push(JSON.parse(body)._embedded.events[i]);
 
                 }
@@ -75,7 +79,7 @@ module.exports = function(app) {
             request (queryUrl, function(error, response, body) {
               if (!error && response.statusCode === 200) {
                 for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
-                  console.log(JSON.parse(body)._embedded.events[i]);
+                  // console.log(JSON.parse(body)._embedded.events[i]);
                   apiData.push(JSON.parse(body)._embedded.events[i]);
                 }
               }
@@ -94,7 +98,7 @@ module.exports = function(app) {
               if (!error && response.statusCode === 200) {
 
                  for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
-                  console.log(JSON.parse(body)._embedded.events[i]);
+                  // console.log(JSON.parse(body)._embedded.events[i]);
                   apiData.push(JSON.parse(body)._embedded.events[i]);
                 }
 
@@ -112,11 +116,11 @@ module.exports = function(app) {
 
 
   // drafting post to artist and venue table and delete to artist and venue table below.
-  app.post("/api/artist", function(req, res) {
-    
+  app.post("/api/favartist", function(req, res) {
+    console.log(req.body, 'req.body');
     db.Artist.create({
-      Artist: req.body.artist, // placeholder
-      foreignKey: req.body.user // placeholder. column name is UserId in created table.
+      artist: req.body.artist, // placeholder
+      userId: req.body.userId // placeholder. column name is UserId in created table.
     }).then(Artist => {
       res.json(Artist);
       console.log(res.json(Artist));
@@ -124,11 +128,11 @@ module.exports = function(app) {
     })
 
   });
-  app.post("/api/venue", function(req, res) {
+  app.post("/api/favvenue", function(req, res) {
     
     db.Venue.create({
-      Venue: req.body.venue, // placeholder
-      foreignKey: req.body.user // placeholder. column name is UserId in created table.
+      venue: req.body.venue, // placeholder
+      userId: req.body.userID // placeholder. column name is UserId in created table.
     }).then(Venue => {
       res.json(Venue);
       console.log(res.json(Venue));
@@ -137,7 +141,7 @@ module.exports = function(app) {
 
   });
   // delete posts are probably not accurate yet. will need to see what info we get from the front end to pass into the query.
-  app.delete("/api/artist/:id", function(req, res) {
+  app.delete("/api/favartist/:id", function(req, res) {
     db.Artist.destroy({
       where: {
         id: req.params.id
@@ -147,7 +151,7 @@ module.exports = function(app) {
       console.log(res.json(Artist));
     })
   });
-  app.delete("/api/venue/:id", function(req, res) {
+  app.delete("/api/favvenue/:id", function(req, res) {
     db.Venue.destroy({
       where: {
         id: req.params.id
