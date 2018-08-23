@@ -49,7 +49,7 @@ module.exports = function(app) {
   app.post("/api/artist", function(req, res) {
     search = req.body.search;
    
-    console.log(search + "search");
+    console.log(search + " search");
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
     
             //this get should work for artist or venue search.
@@ -57,11 +57,17 @@ module.exports = function(app) {
             request (queryUrl, function(error, response, body) {
               // console.log(body);
               if (!error && response.statusCode === 200) {
-                for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
-                  // console.log(JSON.parse(body)._embedded.events[i]);
-                  apiData.push(JSON.parse(body)._embedded.events[i]);
-
+                console.log(JSON.parse(body));
+                if (Object.keys(body.length) < 3) { // checks if the object returned has events. Object would be larger if band was touring.
+                  console.log("This artist is not touring");
+                } else {
+                  for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
+                    // console.log(JSON.parse(body)._embedded.events[i]);
+                    apiData.push(JSON.parse(body)._embedded.events[i]);
+                  }
+                  
                 }
+              
               }
               res.json(apiData);
             })

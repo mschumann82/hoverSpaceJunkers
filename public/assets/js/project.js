@@ -133,20 +133,7 @@ $(document).ready( function() {
 
 // anything below this line is a draft of what the posts and deletes will be. We still need to populate the page and obtain values.
 
-  // $("#searchBtn").on("click", function(event) {
-  // console.log("clicked");
-  // // Don't refresh the page!
-  // event.preventDefault();
-  // var radio = $("input[name=radios]:checked").val();
-  // var input = $("#table_filter").val();
   
-  // console.log(input);
-  // console.log(radio);
-
-  // const userData = {
-  //     search: input
-      
-  //   };
 
         $(document).on("click", "#favArtist", insertArtist);
           
@@ -237,6 +224,7 @@ $(document).ready( function() {
 
       $( "body" ).on( "click", ".artist-item", function() {
         console.log("delete artist clicked");
+            // $("#artList").empty();
             // let id = $(this).data("id");
             let id = $(this).val();
             // let id = $((this).data("number").id);
@@ -247,6 +235,7 @@ $(document).ready( function() {
             }).then(getArtists);
       });
       $( "body" ).on( "click", ".venue-item", function() {
+            // $("#venList").empty();
             console.log("delete venue clicked");
             // let id = $(this).data("id");
             let id = $(this).val();
