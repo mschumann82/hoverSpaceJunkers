@@ -49,7 +49,9 @@ module.exports = function(app) {
   app.post("/api/artist", function(req, res) {
     search = req.body.search;
    
+
     console.log(search + " search");
+    
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
     
             //this get should work for artist or venue search.
