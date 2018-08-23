@@ -53,14 +53,12 @@ module.exports = function(app) {
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
     
             //this get should work for artist or venue search.
-        var apiData = [];
+        let apiData = [];
             request (queryUrl, function(error, response, body) {
               // console.log(body);
               if (!error && response.statusCode === 200) {
                 console.log(JSON.parse(body));
-                if (Object.keys(body.length) < 3) { // checks if the object returned has events. Object would be larger if band was touring.
-                  console.log("This artist is not touring");
-                } else {
+               
                   for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
                     // console.log(JSON.parse(body)._embedded.events[i]);
                     apiData.push(JSON.parse(body)._embedded.events[i]);
@@ -68,7 +66,6 @@ module.exports = function(app) {
                   
                 }
               
-              }
               res.json(apiData);
             })
           });
@@ -81,7 +78,7 @@ module.exports = function(app) {
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
     
 
-        var apiData = [];   
+        let apiData = [];   
             request (queryUrl, function(error, response, body) {
               if (!error && response.statusCode === 200) {
                 for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
@@ -99,7 +96,7 @@ module.exports = function(app) {
     console.log(search + "api");
     let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&city=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
     
-          var apiData = [];           
+          let apiData = [];           
             request (queryUrl, function(error, response, body) {
               if (!error && response.statusCode === 200) {
 
@@ -197,7 +194,50 @@ app.get("/api/ven-table/:id", function(req, res) {
 });
 
 
-
+// post route for favorite searches
+app.post("/api/getFavArt", function(req, res) {
+  search = req.body.search;
+ 
+  console.log(search + " search");
+  let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
+  
+          //this get should work for artist or venue search.
+      let apiData = [];
+          request (queryUrl, function(error, response, body) {
+            // console.log(body);
+            if (!error && response.statusCode === 200) {
+              console.log(JSON.parse(body));
+              
+                for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
+                  // console.log(JSON.parse(body)._embedded.events[i]);
+                  apiData.push(JSON.parse(body)._embedded.events[i]);
+                 } //closes for loop
+                
+               
+            }//
+            
+            res.json(apiData);
+          }) // closes request
+        });// closes post
+        app.post("/api/getFavVen", function(req, res) {
+          search = req.body.search;
+         
+          console.log(search);
+          let queryUrl = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + ticket + "&keyword=" + search + "&sort=date,asc&countryCode=US&classificationName=music"; 
+          
+      
+              let apiData = [];   
+                  request (queryUrl, function(error, response, body) {
+                    if (!error && response.statusCode === 200) {
+                      for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
+                        // console.log(JSON.parse(body)._embedded.events[i]);
+                        apiData.push(JSON.parse(body)._embedded.events[i]);
+                      }
+                    }
+                    res.json(apiData);
+                  })
+      
+        });
 
 
 

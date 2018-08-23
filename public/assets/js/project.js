@@ -13,7 +13,7 @@ $(document).ready( function() {
 
       for (let i = 0; i < data.length; i++) {
       
-        $("#artList").append("<ul><li><button class = 'artist-item' value ="+data[i].id+">X</button>" + data[i].artist + "</li></ul>");
+        $("#artList").append("<ul><li><button class = 'artist-item' value ="+data[i].id+">X</button><a class = 'getFavArt' href= '#'>" + data[i].artist + "</a></li></ul>");
         
       }
       
@@ -24,7 +24,7 @@ $(document).ready( function() {
 
       for (let i = 0; i < data.length; i++) {
       
-        $("#venList").append("<ul><li><button class = 'venue-item' value ="+data[i].id+">X</button>" + data[i].venue + "</li></ul>");
+        $("#venList").append("<ul><li><button class = 'venue-item' value ="+data[i].id+">X</button><a class = 'getFavVen' href= '#'>" + data[i].venue + "</a></li></ul>");
         
       }
       
@@ -45,6 +45,8 @@ $(document).ready( function() {
               $("#artist-data").empty();
               $("#venue-data").empty();
               $("#location-data").empty();
+              $("#art-name").empty();
+              $("#ven-name").empty();
         var radio = $("input[name=radios]:checked").val();
         var input = $("#table_filter").val();
         
@@ -118,6 +120,7 @@ $(document).ready( function() {
             $.post("/api/artist", userData, function(data) {
 
                 console.log(data);
+                
                 for(var i = 0; i < data.length; i++) {
                   console.log(data[i].dates.start.localDate);
                   console.log(data[i]._embedded.venues[0].name);
@@ -131,7 +134,7 @@ $(document).ready( function() {
               break;
         }
 
-// anything below this line is a draft of what the posts and deletes will be. We still need to populate the page and obtain values.
+// anything below this line is what the posts and deletes will be. 
 
   
 
@@ -184,7 +187,7 @@ $(document).ready( function() {
       
             for (let i = 0; i < data.length; i++) {
             
-              $("#venList").append("<ul><li><button class = 'venue-item' value ="+data[i].id+">X</button>" + data[i].venue + "</li></ul>");
+              $("#venList").append("<ul><li><button class = 'venue-item' value ="+data[i].id+">X</button><a class = 'getFavArt' href= '#'>" + data[i].venue + "</a></li></ul>");
               // $("venue-item").data("number", {id: data[i].id});
             }
             
@@ -207,7 +210,7 @@ $(document).ready( function() {
       
             for (let i = 0; i < data.length; i++) {
             
-              $("#artList").append("<ul><li><button class = 'artist-item' value ="+data[i].id+">X</button>" + data[i].artist + "</li></ul>");
+              $("#artList").append("<ul><li><button class = 'artist-item' value ="+data[i].id+">X</button><a class = 'getFavArt' href= '#'>" + data[i].artist + "</a></li></ul>");
               // $("artist-item").data("number", {id: data[i].id});
             }
             
@@ -220,7 +223,7 @@ $(document).ready( function() {
     
       });
 
-    
+    // deletes dont empty out id or refresh entries. have to figure out the callback.
 
       $( "body" ).on( "click", ".artist-item", function() {
         console.log("delete artist clicked");
@@ -247,6 +250,101 @@ $(document).ready( function() {
             }).then(getVenues);
       });
       
+
+// below is draft of requests to api from favorites tables
+
+$("body").on("click", ".getFavArt", function(event) {
+  console.log("get fav clicked");
+  event.preventDefault();
+  $("#table-title").empty();
+  $("#table-venue-title").empty();
+  $("#table-location-title").empty();
+        $("#artist-data").empty();
+        $("#venue-data").empty();
+        $("#location-data").empty();
+        $("#art-name").empty();
+        $("#ven-name").empty();
+              
+        let fav = $(this).text();
+        // var input = $("#table_filter").val();
+        
+        console.log(fav);
+        
+
+        let userFav = {
+            search: fav
+            
+          };
+          $.post("/api/getFavArt", userFav, function(data) {
+              
+            console.log(data + "data");
+            for(var i = 0; i < data.length; i++) {
+              
+              $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
+                }
+                $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4>`);
+          });
+
+
+
+
+        }); //end of click event
+
+        $("body").on("click", ".getFavVen", function(event) {
+          console.log("get fav clicked");
+          event.preventDefault();
+          $("#table-title").empty();
+          $("#table-venue-title").empty();
+          $("#table-location-title").empty();
+                $("#artist-data").empty();
+                $("#venue-data").empty();
+                $("#location-data").empty();
+                $("#art-name").empty();
+                $("#ven-name").empty();
+                      
+                let fav = $(this).text();
+                // var input = $("#table_filter").val();
+                
+                console.log(fav);
+                
+        
+                let userFav = {
+                    search: fav
+                    
+                  };
+                  $.post("/api/getFavVen", userFav, function(data) {
+                      
+                    console.log(data);
+                    for(var i = 0; i < data.length; i++) {
+                      console.log(data[i].dates.start.localDate);
+                      console.log(data[i]._embedded.venues[0].name);
+                      console.log(data[i]._embedded.venues[0].city.name);
+                      console.log(data[i]._embedded.venues[0].state.name);
+                      $("#venue-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
+                    }
+                    $("#table-title").append(`<h4 id = "ven-name">${data[0]._embedded.attractions[0].name}</h4>`);
+                  });
+        
+        
+        
+        
+                }); //end of click event
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
