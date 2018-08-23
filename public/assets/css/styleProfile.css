@@ -9,11 +9,11 @@
     margin: 0% !important;
 }
 #searchBar {
-    margin-left: 550px;
+    /*margin-left: 550px;*/
     margin-top:.5%
 }
 #table_filter{
-    width: 500px;
+    /*width: 500px;*/
 }
 
 #categoryBtn {
@@ -30,26 +30,42 @@
 }
 
 #searchBtn {
-    margin-right: 400px;
+    /*margin-right: 400px;*/
     color: black;
 }
 
 #signOut {
     
-    margin-right: 200px;
+    /*margin-right: 200px;*/
 }
 
 .row {
     color: white;
 } 
 
-#hsj {
-    font-size: 32px;
-}
+
 a {
-    color: white !important;
+    /*color: white !important;*/
     font-size: 18px;
     
+}
+
+input[type="text"]
+{
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
 .category_filters{
@@ -126,3 +142,100 @@ body {
     text-align: right;
     color: black;
 }
+
+.runButtonArtist, .runButtonVenue { cursor: pointer; }
+
+.runButtonArtist:hover, .runButtonVenue:hover { text-decoration: underline; }
+
+.artist-item, .venue-item { opacity: 0.5;}
+
+.artist-item:hover, .venue-item:hover { opacity: 1;}
+
+@media screen and (max-width: 783px) 
+{
+	#hsj
+	{
+		transform: translateY(50px);
+	}
+
+	nav
+	{
+		height: 100px !important;
+	}
+
+	nav input
+	{
+		display: block !important;
+		width: 100%;
+		left: 0px !important;
+		transform: translateX(0px) !important;
+	}
+
+	#searchBtn
+	{
+		top: 57px !important;
+		left: auto !important;
+		right: 50px;
+	}
+
+	#categoryBtn
+	{
+		top: 57px !important;
+		left: auto !important;
+		right: 200px;
+		transform: translateX(0px) !important;
+	}
+
+	#signOut
+	{
+		top: 59px !important;
+	}
+
+}
+
+@media screen and (max-width: 524px) 
+{
+	#hsj
+	{
+		float: auto;
+		width: 100%;
+		text-align: center;
+		transform: translateY(100px);
+	}
+
+	nav
+	{
+		height: 150px !important;
+	}
+
+	nav input
+	{
+		display: block !important;
+		width: 100%;
+		left: 0px !important;
+		transform: translateX(0px) !important;
+	}
+
+	#searchBtn
+	{
+		top: 57px !important;
+		left: 100px !important;
+		right: auto;
+		transform: translateX(0px) !important;
+	}
+
+	#categoryBtn
+	{
+		top: 57px !important;
+		left: 0px !important;
+		right: auto;
+		transform: translateX(0px) !important;
+	}
+
+	#signOut
+	{
+		top: 59px !important;
+	}
+
+}
+

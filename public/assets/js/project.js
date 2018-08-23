@@ -32,7 +32,10 @@ function toggleTables(radio) {
 var globalId;
 
 $(document).ready( function() {
-  
+
+  $("#artistDiv").hide();
+  $("#venueDiv").hide();
+  $("#locationDiv").hide();
 
   $.get("/session", function(data) {
      globalId = data.id;
@@ -43,18 +46,19 @@ $(document).ready( function() {
 
       for (let i = 0; i < data.length; i++) {
       
-        $("#artList").append("<ul><li><button class = 'artist-item' value ="+data[i].id+">X</button>" + data[i].artist + "</li></ul>");
+        $("#artList").append("<ul><li><button class = 'btn artist-item' value ="+data[i].id+">X</button>&nbsp;<span class='runButtonArtist'>" + data[i].artist + "</span></li></ul>");
         
       }
       
     });
+
     $.get("/api/ven-table/" + globalId, function(data) {
       $("venList").empty();
       console.log(data);
 
       for (let i = 0; i < data.length; i++) {
       
-        $("#venList").append("<ul><li><button class = 'venue-item' value ="+data[i].id+">X</button>" + data[i].venue + "</li></ul>");
+        $("#venList").append("<ul><li><button class = 'btn venue-item' value ="+data[i].id+">X</button>&nbsp;<span class='runButtonVenue'>" + data[i].venue + "</span></li></ul>");
         
       }
       
@@ -65,7 +69,10 @@ $(document).ready( function() {
 
    
 
-    $("#searchBtn").on("click", function(event) {
+    $("#searchBtn").on("click", searchEvent);
+
+
+function searchEvent(event, fromFavorites, searchTerm) {
       
         console.log("clicked");
         // Don't refresh the page!
@@ -78,6 +85,11 @@ $(document).ready( function() {
               $("#location-data").empty();
         var radio = $("input[name=radios]:checked").val();
         var input = $("#table_filter").val();
+		if(fromFavorites === "Artist" || fromFavorites === "Venue")
+		{
+			radio = fromFavorites;
+			input = searchTerm;
+		}
         toggleTables(radio)
         console.log(input);
         console.log(radio);
@@ -89,20 +101,22 @@ $(document).ready( function() {
 
 
 
-
-
 //displays Artist info into table
         switch (radio) {
             case "Artist":
             $.post("/api/artist", userData, function(data) {
-              
+				if(data[0] === "This artist is not touring")
+				{
+					$("#table-title").append(`This artist is not touring`);
+					return;
+				}
                 console.log(data);
                 for(var i = 0; i < data.length; i++) {
                   console.log(data[i].dates.start.localDate);
                   console.log(data[i]._embedded.venues[0].name);
                   console.log(data[i]._embedded.venues[0].city.name);
                   console.log(data[i]._embedded.venues[0].state.name);
-                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}.</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
+                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}.</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td><span class='runButtonVenue'>${data[i]._embedded.venues[0].name}</span></td></tr>`);
                 }
                 $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist"; style="margin-left: 10px">Add to favorites</button>`);
               });
@@ -136,8 +150,9 @@ $(document).ready( function() {
                 console.log(data[i].name);
                 console.log(data[i]._embedded.venues[0].name);
                 $("#location-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i].name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
+				//$("#location-data").append(`<tr><td>${data[i].dates.start.localDate}.</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
                 }
-                // $("#table-location-title").append(`<h4>${data[i]._embedded.venues[0].city.name}</h4>`);
+                 //$("#table-location-title").append(`<h4>${data[0]._embedded.venues[0].city.name}</h4>`);
 
               });
                 break;
@@ -146,7 +161,11 @@ $(document).ready( function() {
 //Default Artist Case
             default: 
             $.post("/api/artist", userData, function(data) {
-
+				if(data[0] === "This artist is not touring")
+				{
+					$("#table-title").append(`This artist is not touring`);
+					return;
+				}
                 console.log(data);
                 for(var i = 0; i < data.length; i++) {
                   console.log(data[i].dates.start.localDate);
@@ -162,6 +181,8 @@ $(document).ready( function() {
               });
               break;
         }
+}
+
 
 // anything below this line is a draft of what the posts and deletes will be. We still need to populate the page and obtain values.
 
@@ -182,7 +203,9 @@ $(document).ready( function() {
             console.log("post favArtist");
           }
         // });
+
         $(document).on("click", "#favVenue", insertVenue);
+
         function insertVenue(event) {
             const ven = $("#ven-name").text();
             event.preventDefault();
@@ -194,6 +217,7 @@ $(document).ready( function() {
             $.post("/api/favvenue", favorite, getVenues);
             console.log("post favVenue");
           }
+
         // });
         // $('body').on("click", ".venue-item", deleteVenue);
         // $('body').on("click", ".artist-item", deleteArtist);
@@ -208,6 +232,7 @@ $(document).ready( function() {
         //       url: "/api/ven-table/" + id
         //     }).then(getVenues);
         //   }
+
         function getVenues() {
           $("#venList").empty();
           $.get("/api/ven-table/" + globalId, function(data) {
@@ -216,12 +241,13 @@ $(document).ready( function() {
       
             for (let i = 0; i < data.length; i++) {
             
-              $("#venList").append("<ul><li><button class = 'venue-item' value ="+data[i].id+">X</button>" + data[i].venue + "</li></ul>");
+			  $("#venList").append("<ul><li><button class = 'btn venue-item' value ="+data[i].id+">X</button>&nbsp;<span class='runButtonVenue'>" + data[i].venue + "</span></li></ul>");
               // $("venue-item").data("number", {id: data[i].id});
             }
             
           });
           }
+
           // function deleteArtist(event) {
           //   // event.preventDefault();
           //   console.log("delete artist clicked");
@@ -231,6 +257,7 @@ $(document).ready( function() {
           //     url: "/api/art-table/" + id
           //   }).then(getArtists);
           // }
+
         function getArtists() {
           $("#artList").empty();
           $.get("/api/art-table/" + globalId, function(data) {
@@ -239,18 +266,15 @@ $(document).ready( function() {
       
             for (let i = 0; i < data.length; i++) {
             
-              $("#artList").append("<ul><li><button class = 'artist-item' value ="+data[i].id+">X</button>" + data[i].artist + "</li></ul>");
+			  $("#artList").append("<ul><li><button class = 'btn artist-item' value ="+data[i].id+">X</button>&nbsp;<span class='runButtonArtist'>" + data[i].artist + "</span></li></ul>");
               // $("artist-item").data("number", {id: data[i].id});
             }
             
           });
           }
 
-          
-
-          
     
-      });
+      
 
     
 
@@ -266,6 +290,7 @@ $(document).ready( function() {
               url: "/api/art-table/" + id
             }).then(getArtists);
       });
+
       $( "body" ).on( "click", ".venue-item", function() {
             // $("#venList").empty();
             console.log("delete venue clicked");
@@ -278,6 +303,30 @@ $(document).ready( function() {
               url: "/api/ven-table/" + id
             }).then(getVenues);
       });
+
+		
+	  //runFromFavorites
+
+	  $( "body" ).on( "click", ".runButtonArtist", function() {
+            console.log("run Artist fromFavorites clicked");
+
+            let searchTerm = $(this).text();
+            console.log(searchTerm);
+
+			searchEvent(event, "Artist", searchTerm)
+			
+      });
+
+	  $( "body" ).on( "click", ".runButtonVenue", function() {
+            console.log("run Venue fromFavorites clicked");
+
+            let searchTerm = $(this).text();
+            console.log(searchTerm);
+
+			searchEvent(event, "Venue", searchTerm)
+			
+      });
+
       
 
 

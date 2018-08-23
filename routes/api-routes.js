@@ -60,8 +60,9 @@ module.exports = function(app) {
               // console.log(body);
               if (!error && response.statusCode === 200) {
                 console.log(JSON.parse(body));
-                if (Object.keys(body.length) < 3) { // checks if the object returned has events. Object would be larger if band was touring.
+                if (!(JSON.parse(body)._embedded)) { // checks if the object returned is missing an events array.
                   console.log("This artist is not touring");
+				  apiData.push("This artist is not touring");
                 } else {
                   for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
                     // console.log(JSON.parse(body)._embedded.events[i]);
@@ -106,7 +107,7 @@ module.exports = function(app) {
               if (!error && response.statusCode === 200) {
 
                  for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
-                  // console.log(JSON.parse(body)._embedded.events[i]);
+                  //console.log(JSON.parse(body)._embedded.events[i]);
                   apiData.push(JSON.parse(body)._embedded.events[i]);
                 }
 
