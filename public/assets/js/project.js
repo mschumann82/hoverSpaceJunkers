@@ -118,7 +118,7 @@ function searchEvent(event, fromFavorites, searchTerm) {
                   console.log(data[i]._embedded.venues[0].state.name);
                   $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}.</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td><span class='runButtonVenue'>${data[i]._embedded.venues[0].name}</span></td></tr>`);
                 }
-                $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist"; style="margin-left: 10px">Add to favorites</button>`);
+                $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist" class="btn" style="margin-left: 10px; color: black;">Add to favorites</button>`);
               });
                 break;
 
@@ -134,7 +134,7 @@ function searchEvent(event, fromFavorites, searchTerm) {
                 console.log(data[i].classifications[0].genre.name);
                 $("#venue-data").append(`<tr><td>${data[i].name}</td><td>${data[i].dates.start.localDate}</td><td>${data[i].classifications[0].genre.name}</td></tr>`);
               }
-              $("#table-venue-title").append(`<h4 id = "ven-name">${data[0]._embedded.venues[0].name}</h4><button id="favVenue"; style="margin-left: 10px">Add to favorites</button>`);
+              $("#table-venue-title").append(`<h4 id = "ven-name">${data[0]._embedded.venues[0].name}</h4><button id="favVenue" class="btn" style="margin-left: 10px">Add to favorites</button>`);
 
               });
                 break;
