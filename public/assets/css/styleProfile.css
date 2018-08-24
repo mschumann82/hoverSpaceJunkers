@@ -126,3 +126,7 @@ body {
     text-align: right;
     color: black;
 }
+a {
+    color:black !important;
+    font-size: 12px;
+}

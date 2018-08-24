@@ -28,7 +28,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a id="hsj" class="navbar-brand" href="#">HoverSpaceJunkers</a>
+                <div id="hsj" class="navbar-brand" href="#">HoverSpaceJunkers</div>
             </div>
             <!-- Category button-->
             <div id="categoryBtn" class="row searchFilter">
@@ -94,6 +94,7 @@
                                             <th scope="col" id="date">Date of Concert</th>
                                             <th scope="col" id="location">Location</th>
                                             <th scope="col" id="venue">Venue</th>
+                                            <th scope="col" id="venue">Buy Tickets</th>
                                         </tr>
                                         <tbody id="artist-data"></tbody>
                                 </table>
@@ -114,6 +115,7 @@
                                             <th scope="col" id="artist">Artist </th>
                                             <th scope="col" id="date">Date of Concert</th>
                                             <th scope="col" id="price">Genre</th>
+                                            <th scope="col" id="venue">Buy Tickets</th>
                                         </tr>
                                         <tbody id="venue-data"></tbody>
                                 </table>
@@ -134,6 +136,7 @@
                                             <th scope="col-" id="date">Date of Concert</th>
                                             <th scope="col" id="artist">Artist</th>
                                             <th scope="col" id="venue">Venue</th>
+                                            <th scope="col" id="venue">Buy Tickets</th>
                                         </tr>
                                         <tbody id="location-data"></tbody>
                                 </table>
@@ -149,33 +152,17 @@
                     <div id="Artist" class="col-md-12" style="height: 450px; background-color:#a3acba">
                         <br>Favorite Artists:
                         <br>
-                        <ul>
-                            <li>Twenty One Pilots
-                                <button id="deleteArtist">Remove Band</button>
-                            </li>
-                            <li>Coheed and Cambria
-                                <button id="deleteArtist">Remove Band</button>
-                            </li>
-                            <li>Taking Back Sunday
-                                <button id="deleteArtist">Remove Band</button>
-                            </li>
-                        </ul>
+                        <div id = "artList">
+                            <!--list data-->
+                        </div>
                     </div>
                     <!-- Favorite Venue-->
                     <div id="Venues" class="col-md-12" style="height: 450px;background-color:#a3acba">
                         <br>Favorite Venues:
                         <br>
-                        <ul>
-                            <li>The Van Buren
-                                <button id="deleteVenue">Remove Venue</button>
-                            </li>
-                            <li>Ak Chin Pavilion
-                                <button id="deleteVenue">Remove Venue</button>
-                            </li>
-                            <li>Comerica Theatre
-                                <button id="deleteVenue">Remove Venue</button>
-                            </li>
-                        </ul>
+                        <div id = "venList">
+                            <!--list data-->
+                        </div>
                     </div>
                 </div>
             </div>
