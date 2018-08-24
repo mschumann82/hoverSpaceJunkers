@@ -6,6 +6,12 @@
     box-sizing: border-box;
 }
 
+
+#venueDiv {
+    background-color: inherit;
+    color: inherit;
+}
+
 .navbar {
     margin: 0% !important;
 }
@@ -198,6 +204,7 @@ table.table-bordered > tbody > tr > td{
     border:1px solid #080808;
 }
 
+<<<<<<< HEAD
 #radioListDiv
 {
 	position: absolute;
@@ -212,6 +219,13 @@ table.table-bordered > tbody > tr > td{
 
 
 
+=======
+.panel-default>.panel-heading {
+    background-color: inherit;
+    color: inherit;
+}
+
+>>>>>>> d68859e52a5cf4f9d8a902eb7f9e2dba5df1ed9a
 .runButtonArtist, .runButtonVenue { cursor: pointer; }
 
 .runButtonArtist:hover, .runButtonVenue:hover { text-decoration: underline; }
