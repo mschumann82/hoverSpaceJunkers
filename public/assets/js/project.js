@@ -36,6 +36,7 @@ $(document).ready( function() {
   $("#artistDiv").hide();
   $("#venueDiv").hide();
   $("#locationDiv").hide();
+  $("#radioListDiv").hide();
 
   $.get("/session", function(data) {
      globalId = data.id;
@@ -72,116 +73,6 @@ $(document).ready( function() {
     $("#searchBtn").on("click", searchEvent);
 
 
-function searchEvent(event, fromFavorites, searchTerm) {
-      
-        console.log("clicked");
-        // Don't refresh the page!
-        event.preventDefault();
-        $("#table-title").empty();
-        $("#table-venue-title").empty();
-        $("#table-location-title").empty();
-              $("#artist-data").empty();
-              $("#venue-data").empty();
-              $("#location-data").empty();
-        var radio = $("input[name=radios]:checked").val();
-        var input = $("#table_filter").val();
-		if(fromFavorites === "Artist" || fromFavorites === "Venue")
-		{
-			radio = fromFavorites;
-			input = searchTerm;
-		}
-        toggleTables(radio)
-        console.log(input);
-        console.log(radio);
-
-        const userData = {
-            search: input
-          };
-        // search = $("#table-filter").val();
-
-
-
-//displays Artist info into table
-        switch (radio) {
-            case "Artist":
-            $.post("/api/artist", userData, function(data) {
-				if(data[0] === "This artist is not touring")
-				{
-					$("#table-title").append(`This artist is not touring`);
-					return;
-				}
-                console.log(data);
-                for(var i = 0; i < data.length; i++) {
-                  console.log(data[i].dates.start.localDate);
-                  console.log(data[i]._embedded.venues[0].name);
-                  console.log(data[i]._embedded.venues[0].city.name);
-                  console.log(data[i]._embedded.venues[0].state.name);
-                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}.</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td><span class='runButtonVenue'>${data[i]._embedded.venues[0].name}</span></td></tr>`);
-                }
-                $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist" class="btn" style="margin-left: 10px; color: black;">Add to favorites</button>`);
-              });
-                break;
-
-
-//displays Venue info into table
-            case "Venue":
-            $.post("/api/venue", userData, function(data) {
-              
-              console.log(data);
-              for(var i = 0; i < data.length; i++) {
-                console.log(data[i].dates.start.localDate);
-                console.log(data[i].name);
-                console.log(data[i].classifications[0].genre.name);
-                $("#venue-data").append(`<tr><td>${data[i].name}</td><td>${data[i].dates.start.localDate}</td><td>${data[i].classifications[0].genre.name}</td></tr>`);
-              }
-              $("#table-venue-title").append(`<h4 id = "ven-name">${data[0]._embedded.venues[0].name}</h4><button id="favVenue" class="btn" style="margin-left: 10px">Add to favorites</button>`);
-
-              });
-                break;
-
-
-//displays location info into table
-            case "Location":
-            $.post("/api/location", userData, function(data) {
-              
-                console.log(data + "public");
-                for(var i = 0; i < data.length; i++) {
-                console.log(data[i].dates.start.localDate);
-                console.log(data[i].name);
-                console.log(data[i]._embedded.venues[0].name);
-                $("#location-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i].name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
-				//$("#location-data").append(`<tr><td>${data[i].dates.start.localDate}.</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
-                }
-                 //$("#table-location-title").append(`<h4>${data[0]._embedded.venues[0].city.name}</h4>`);
-
-              });
-                break;
-
-                
-//Default Artist Case
-            default: 
-            $.post("/api/artist", userData, function(data) {
-				if(data[0] === "This artist is not touring")
-				{
-					$("#table-title").append(`This artist is not touring`);
-					return;
-				}
-                console.log(data);
-                for(var i = 0; i < data.length; i++) {
-                  console.log(data[i].dates.start.localDate);
-                  console.log(data[i]._embedded.venues[0].name);
-                  console.log(data[i]._embedded.venues[0].city.name);
-                  console.log(data[i]._embedded.venues[0].state.name);
-                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`)
-                }
-
-                $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist"; style="margin-left: 10px">Add to favorites</button>`);
-
-
-              });
-              break;
-        }
-}
 
 
 // anything below this line is a draft of what the posts and deletes will be. We still need to populate the page and obtain values.
@@ -327,11 +218,174 @@ function searchEvent(event, fromFavorites, searchTerm) {
 			
       });
 
-      
-
-
 
 
 
 
 });// end of document.ready
+
+function searchEvent(event, fromFavorites, searchTerm) {
+		window.scrollTo(0,0);
+        console.log("clicked");
+        // Don't refresh the page!
+		if(event)
+		{
+			event.preventDefault();
+		}
+        $("#table-title").empty();
+        $("#table-venue-title").empty();
+        $("#table-location-title").empty();
+              $("#artist-data").empty();
+              $("#venue-data").empty();
+              $("#location-data").empty();
+        var radio = $("input[name=radios]:checked").val();
+        var input = $("#table_filter").val();
+		if(fromFavorites === "Artist" || fromFavorites === "Venue")
+		{
+			radio = fromFavorites;
+			input = searchTerm;
+		}
+        toggleTables(radio)
+        console.log(input);
+        console.log(radio);
+
+        const userData = {
+            search: input
+          };
+        // search = $("#table-filter").val();
+
+
+
+//displays Artist info into table
+        switch (radio) {
+            case "Artist":
+            $.post("/api/artist", userData, function(data) {
+				if(data[0] === "This artist is not touring")
+				{
+					$("#table-title").append(`This artist is not touring`);
+					return;
+				}
+                console.log(data);
+                for(var i = 0; i < data.length; i++) {
+                  console.log(data[i].dates.start.localDate);
+                  console.log(data[i]._embedded.venues[0].name);
+                  console.log(data[i]._embedded.venues[0].city.name);
+                  console.log(data[i]._embedded.venues[0].state.name);
+                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td><span class='runButtonVenue'>${data[i]._embedded.venues[0].name}</span></td><td><a href="${data[i].url}" target="_blank">Buy Tickets</a></td></tr>`);
+                }
+                $("#table-title").append(`<span id = "art-name">${data[0]._embedded.attractions[0].name}</span><button id="favArtist" class="btn" style="margin-left: 10px; color: black;">Add to favorites</button>`);
+              });
+                break;
+
+
+//displays Venue info into table
+            case "Venue":
+            $.post("/api/venue", userData, function(data) {
+              if(data[0] === "Venue not found.")
+				{
+					$("#table-title").append(`Venue not found.`);
+					return;
+				}
+              console.log(data);
+              for(var i = 0; i < data.length; i++) {
+                console.log(data[i].dates.start.localDate);
+                console.log(data[i].name);
+                console.log(data[i].classifications[0].genre.name);
+                $("#venue-data").append(`<tr><td><span class='runButtonArtist'>${data[i].name}</span></td><td>${data[i].dates.start.localDate}</td><td>${data[i].classifications[0].genre.name}</td><td><a href="${data[i].url}" target="_blank">Buy Tickets</a></td></tr>`);
+              }
+              $("#table-venue-title").append(`<span id = "ven-name">${data[0]._embedded.venues[0].name}</span><button id="favVenue" class="btn" style="margin-left: 10px; color: black;">Add to favorites</button>`);
+
+              });
+                break;
+
+
+//displays location info into table
+            case "Location":
+            $.post("/api/location", userData, function(data) {
+               if(data[0] === "Nothing found for that location.")
+				{
+					$("#table-title").append(`Nothing found for that location.`);
+					return;
+				}
+                console.log(data + "public");
+                for(var i = 0; i < data.length; i++) {
+                console.log(data[i].dates.start.localDate);
+                console.log(data[i].name);
+                console.log(data[i]._embedded.venues[0].name);
+                $("#location-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td><span class='runButtonArtist'>${data[i].name}</span></td><td><span class='runButtonVenue'>${data[i]._embedded.venues[0].name}</span></td><td><a href="${data[i].url}">Buy Tickets</a></td></tr>`)
+				//$("#location-data").append(`<tr><td>${data[i].dates.start.localDate}.</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
+                }
+                 $("#table-location-title").append(`<h4>${data[0]._embedded.venues[0].city.name}</h4>`);
+
+              });
+                break;
+
+                
+//Default Artist Case
+            default: 
+            $.post("/api/artist", userData, function(data) {
+				if(data[0] === "This artist is not touring")
+				{
+					$("#table-title").append(`This artist is not touring`);
+					return;
+				}
+                console.log(data);
+                for(var i = 0; i < data.length; i++) {
+                  console.log(data[i].dates.start.localDate);
+                  console.log(data[i]._embedded.venues[0].name);
+                  console.log(data[i]._embedded.venues[0].city.name);
+                  console.log(data[i]._embedded.venues[0].state.name);
+                  $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td><span class='runButtonVenue'>${data[i]._embedded.venues[0].name}</span></td><td><a href="${data[i].url}" target="_blank">Buy Tickets</a></td></tr>`)
+                }
+
+                $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist" class="btn" style="margin-left: 10px; color: black;">Add to favorites</button>`);
+
+
+              });
+              break;
+        }
+}
+
+
+var radioDivShown = false;
+
+function showRadiosDiv()
+{
+	if(!radioDivShown)
+	{
+		radioDivShown = true;
+		let catButtonLocationX = $("#categoryBtn").offset().left;
+		let catButtonLocationY = $("#categoryBtn").offset().top;
+
+		$("#radioListDiv").css({left: catButtonLocationX + "px", top: (catButtonLocationY + 34) + "px"});
+		$("#radioListDiv").show();
+	}
+	else
+	{	
+		radioDivShown = false;
+		$("#radioListDiv").hide();
+	}
+}
+
+function submitSearch(event)
+{
+		var keypressed = event.keyCode;
+		if (keypressed == 13) {
+			searchEvent();
+		}
+}
+
+
+
+$(window).on('resize', function(){
+		if(radioDivShown)
+		{
+			let catButtonLocationX = $("#categoryBtn").offset().left;
+			let catButtonLocationY = $("#categoryBtn").offset().top;
+
+			console.log(catButtonLocationX, catButtonLocationY);
+
+			$("#radioListDiv").css({left: catButtonLocationX + "px", top: (catButtonLocationY + 34) + "px"});
+		}
+
+	});

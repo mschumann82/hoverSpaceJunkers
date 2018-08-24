@@ -83,6 +83,7 @@ input[type="text"]
     border-top-width: 1px;
     background: url(../images/concert2.jpg);
     background-size: cover;
+	height: calc(100vh - 50px);
 }
 
 th {
@@ -93,12 +94,15 @@ th {
     font-family: 'Ubuntu', sans-serif !important;
     font-size: 36px !important;
     text-align: center;
+	padding-left: 0px;
+	border-bottom: 1px solid black;
     /* border-left-style: ridge;
     border-left-color: #CEEAF7;
     border-left-width: 5px; */
 }
 
 #Venues {
+	padding-left: 0px;
     font-family: 'Ubuntu', sans-serif;
     font-size: 36px !important;
     text-align: center;
@@ -130,8 +134,7 @@ li {
 
 body {
     position: relative;
-    min-height: 100%;
-    min-height: 100vh;
+	overflow: hidden;
 }
 
 #font {
@@ -147,13 +150,46 @@ body {
 }
 
 #artistDiv, #venueDiv, #locationDiv {
-    background-color: #222;
+    background-color: rgba(31,31,31,0.8);
     color:white;
+	border-top: none;
+	border-color: black;
+	margin-bottom: 0px !important;
+}
+
+.table-scroll-wrapper
+{
+	margin-top: 15px;
+	overflow-y: auto;
+	height: calc(100vh - 90px);
+}
+
+#favArtist, #favVenue
+{
+	position: absolute;
+	top: 5px;
+	right: 4.5vw;
+}
+
+#art-name, #ven-name
+{
+	font-size: 24px;
+}
+
+.panel-heading
+{
+	border: none;
+	padding-right: 0px;
+	border-radius: 0px;
+	height: calc(100vh - 50px);
+	overflow:hidden;
 }
 
 table.table-bordered{
     border:1px solid #080808;
     margin-top:20px;
+	padding-bottom: 0px;
+	margin-bottom: 30px;
   }
 table.table-bordered > thead > tr > th{
     border:1px solid #080808;
@@ -162,6 +198,20 @@ table.table-bordered > tbody > tr > td{
     border:1px solid #080808;
 }
 
+#radioListDiv
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: rgb(221,221,221);
+	width: 108px;
+	height: 90px;
+	border-radius: 4px;
+	z-index: 13;
+}
+
+
+
 .runButtonArtist, .runButtonVenue { cursor: pointer; }
 
 .runButtonArtist:hover, .runButtonVenue:hover { text-decoration: underline; }
@@ -169,6 +219,23 @@ table.table-bordered > tbody > tr > td{
 .artist-item, .venue-item { opacity: 0.5;}
 
 .artist-item:hover, .venue-item:hover { opacity: 1;}
+
+@media screen and (max-width: 1070px)
+{
+	#Artist, #Venues
+	{
+		font-size: 24px !important;
+	}
+}
+
+@media screen and (max-width: 991px)
+{
+	body
+	{
+		overflow: auto;
+	}
+
+}
 
 @media screen and (max-width: 783px) 
 {
@@ -182,7 +249,7 @@ table.table-bordered > tbody > tr > td{
 		height: 100px !important;
 	}
 
-	nav input
+	nav input[type="text"]
 	{
 		display: block !important;
 		width: 100%;
@@ -227,7 +294,7 @@ table.table-bordered > tbody > tr > td{
 		height: 150px !important;
 	}
 
-	nav input
+	nav input[type="text"]
 	{
 		display: block !important;
 		width: 100%;
