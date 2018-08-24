@@ -156,7 +156,9 @@ $(document).ready( function() {
                   console.log(data[i]._embedded.venues[0].state.name);
                   $("#artist-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td><td><a href="${data[i].url}">${data[i].url}</a></td></tr>`)
                 }
+
                 $("#table-title").append(`<h4 id = "art-name">${data[0]._embedded.attractions[0].name}</h4><button id="favArtist"; style="margin-left: 10px">Add to favorites</button>`);
+
 
               });
               break;
@@ -164,20 +166,7 @@ $(document).ready( function() {
 
 // anything below this line is a draft of what the posts and deletes will be. We still need to populate the page and obtain values.
 
-  // $("#searchBtn").on("click", function(event) {
-  // console.log("clicked");
-  // // Don't refresh the page!
-  // event.preventDefault();
-  // var radio = $("input[name=radios]:checked").val();
-  // var input = $("#table_filter").val();
   
-  // console.log(input);
-  // console.log(radio);
-
-  // const userData = {
-  //     search: input
-      
-  //   };
 
         $(document).on("click", "#favArtist", insertArtist);
           
@@ -268,6 +257,7 @@ $(document).ready( function() {
 
       $( "body" ).on( "click", ".artist-item", function() {
         console.log("delete artist clicked");
+            // $("#artList").empty();
             // let id = $(this).data("id");
             let id = $(this).val();
             // let id = $((this).data("number").id);
@@ -278,6 +268,7 @@ $(document).ready( function() {
             }).then(getArtists);
       });
       $( "body" ).on( "click", ".venue-item", function() {
+            // $("#venList").empty();
             console.log("delete venue clicked");
             // let id = $(this).data("id");
             let id = $(this).val();
