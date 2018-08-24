@@ -57,14 +57,18 @@ module.exports = function(app) {
             request (queryUrl, function(error, response, body) {
               // console.log(body);
               if (!error && response.statusCode === 200) {
-                console.log(JSON.parse(body));
-               
+                console.log(Object.keys(body).length);
+                if (Object.keys(body).length < 200) { // checks if the object returned has events. Object would be larger if band was touring.
+                  console.log("This artist is not touring");
+                } else {
                   for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
                     // console.log(JSON.parse(body)._embedded.events[i]);
                     apiData.push(JSON.parse(body)._embedded.events[i]);
                   }
                   
                 }
+                }
+                
               
               res.json(apiData);
             })
@@ -206,15 +210,17 @@ app.post("/api/getFavArt", function(req, res) {
           request (queryUrl, function(error, response, body) {
             // console.log(body);
             if (!error && response.statusCode === 200) {
-              console.log(JSON.parse(body));
-              
-                for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
-                  // console.log(JSON.parse(body)._embedded.events[i]);
-                  apiData.push(JSON.parse(body)._embedded.events[i]);
-                 } //closes for loop
-                
-               
-            }//
+              console.log(Object.keys(body).length);
+                if (Object.keys(body).length < 200) { // checks if the object returned has events. Object would be larger if band was touring.
+                  console.log("This artist is not touring");
+                } else {
+                  for (let i = 0; i < (JSON.parse(body)._embedded.events.length); i++) {
+                    // console.log(JSON.parse(body)._embedded.events[i]);
+                    apiData.push(JSON.parse(body)._embedded.events[i]);
+                  }
+                  
+                }
+                }
             
             res.json(apiData);
           }) // closes request

@@ -320,7 +320,7 @@ $("body").on("click", ".getFavArt", function(event) {
                       console.log(data[i]._embedded.venues[0].name);
                       console.log(data[i]._embedded.venues[0].city.name);
                       console.log(data[i]._embedded.venues[0].state.name);
-                      $("#venue-data").append(`<tr><td>${data[i].dates.start.localDate}</td><td>${data[i]._embedded.venues[0].city.name} , ${data[i]._embedded.venues[0].state.name}</td><td>${data[i]._embedded.venues[0].name}</td></tr>`);
+                      $("#venue-data").append(`<tr><td>${data[i].name}</td><td>${data[i].dates.start.localDate}</td><td>${data[i].classifications[0].genre.name}</td></tr>`);
                     }
                     $("#table-title").append(`<h4 id = "ven-name">${data[0]._embedded.attractions[0].name}</h4>`);
                   });
