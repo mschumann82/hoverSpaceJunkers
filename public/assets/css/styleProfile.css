@@ -6,6 +6,12 @@
     box-sizing: border-box;
 }
 
+
+#venueDiv {
+    background-color: inherit;
+    color: inherit;
+}
+
 .navbar {
     margin: 0% !important;
 }
@@ -160,6 +166,11 @@ table.table-bordered > thead > tr > th{
 }
 table.table-bordered > tbody > tr > td{
     border:1px solid #080808;
+}
+
+.panel-default>.panel-heading {
+    background-color: inherit;
+    color: inherit;
 }
 
 .runButtonArtist, .runButtonVenue { cursor: pointer; }

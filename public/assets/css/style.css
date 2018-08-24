@@ -1,5 +1,6 @@
 body {
     background-color: black;
+    overflow: hidden;
 }
 
 #myCarousel {
@@ -28,6 +29,7 @@ body {
 .navbar {
    margin-bottom: 0;
 }
+
 
 
     
