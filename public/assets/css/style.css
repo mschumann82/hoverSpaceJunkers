@@ -1,0 +1,37 @@
+body {
+    background-color: black;
+    overflow: hidden;
+}
+
+#myCarousel {
+    color:white;
+    text-align: center;
+    position: relative;
+
+
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    z-index: 1;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+.images {
+    opacity: .5;
+}
+
+.navbar {
+   margin-bottom: 0;
+}
+
+
+
+    
+
+

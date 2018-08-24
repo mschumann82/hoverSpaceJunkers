@@ -1,0 +1,77 @@
+<html>
+<head>
+  <title>HSJ - Signup</title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+	$("document").ready(function () {
+		sizeBackgroundImage()
+	});
+	
+	$(window).on('resize', function(){
+		sizeBackgroundImage();
+	});
+	
+	function sizeBackgroundImage()
+	{
+		var navHeight = $("nav").outerHeight();
+		var pageHeight = window.innerHeight;
+		var fillHeightAmount = pageHeight - navHeight;
+		
+		$("main").css({height: fillHeightAmount});
+	}
+	</script>
+	<style>
+	form input[type="text"], form input[type="password"]
+	{
+		background-color: rgb(34,34,34);
+		border: 2px solid #9d9d9d;
+		padding-left: 5px;
+		border-radius: 20px;
+		outline: none;
+	}
+	
+	form input[type="text"]:focus, form input[type="password"]:focus
+	{
+		border-left-width: 4px;
+		border-left-color: white;
+		border-right-width: 4px;
+		border-right-color: white;
+	}
+	</style>
+</head>
+<body>
+ <nav class="navbar navbar-inverse" style="margin-bottom: 0px">
+    <div class="container-fluid">
+        <div class="navbar-header">
+                <a class="navbar-brand" href="/index.html">HoverSpaceJunkers</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/signin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    </div>
+</nav>
+			
+<main style="padding-top: 20px; background-image: url('../assets/images/concert.jpg'); background-size: cover; background-position: center; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">
+<div class="container" style="width: 400px;">
+	<div class="row">
+		<div class="col text-center" style="border: 1px solid rgb(8,8,8); background-color: rgb(34,34,34); color: #9d9d9d; border-radius: 20px; padding-top: 20px; padding-bottom: 20px;">
+			<h2>Sign Up</h2>
+			<form id="signup" name="signup" method="post" action="/signup">
+			  <input type="text" name="username" placeholder="username"><br><br>
+			  <input name="password" type="password" placeholder="password"><br><br>
+			  <input name="city" type="text" placeholder="city"><br><br>
+			  <input name="state" type="text" placeholder="state" maxlength="2"><br><br>
+			  <input class="btn" type="submit" value="Sign Up" style="color: #333">
+			</form>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

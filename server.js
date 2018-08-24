@@ -3,7 +3,13 @@ const bodyParser = require("body-parser");
 
 const PORT = process.env.PORT || 8080;
 
+const db = require("./models");
+require('dotenv').config()
+
 const app = express();
+
+var passport   = require('passport');
+var session    = require('express-session');
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
@@ -14,19 +20,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
-// Set Handlebars.
-const exphbs = require("express-handlebars");
+// For Passport
+app.use(session({ secret: 'aG92ZX',resave: true, saveUninitialized:true})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+	
+// Auth Routes
+var authRoute = require('./routes/auth-routes.js')(app,passport,express);	
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+// Load passport strategies
+require('./config/passport/passport.js')(passport,db.user);
 
 // Import routes and give the server access to them.
-const routes = require("./controllers/controller.js");
+require("./routes/api-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
-app.use(routes);
+
 
 // Start our server so that it can begin listening to client requests.
-app.listen(PORT, function() {
-  // Log (server-side) when our server has started
-  console.log("Server listening on: http://localhost:" + PORT);
+db.sequelize.sync({}).then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
 });

@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css?family=Asap:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+#venueDiv {
+    background-color: inherit;
+    color: inherit;
+}
+
+.navbar {
+    margin: 0% !important;
+}
+#searchBar {
+    /*margin-left: 550px;*/
+    margin-top:.5%
+}
+#table_filter{
+    /*width: 500px;*/
+}
+
+#categoryBtn {
+    color: black;
+    margin-right: 20px;
+}
+
+.dropdown-menu.show{
+    margin-left: 435px;
+}
+.category-label {
+    font-size: 12px;
+
+}
+
+#searchBtn {
+    /*margin-right: 400px;*/
+    color: black;
+}
+
+#signOut {
+    
+    /*margin-right: 200px;*/
+}
+
+.row {
+    color: white;
+} 
+
+
+a {
+    /*color: white !important;*/
+    font-size: 18px;
+    
+}
+
+input[type="text"]
+{
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.category_filters{
+    color: black;
+}
+
+
+#titleBox {
+    border-left-style: ridge;
+    border-left-color: black;
+    border-left-width: 1px;
+    border-top-style: ridge;
+    border-top-color: black;
+    border-top-width: 1px;
+    background: url(../images/concert2.jpg);
+    background-size: cover;
+	height: calc(100vh - 50px);
+}
+
+th {
+    width: 200px;
+}
+
+#Artist {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 36px !important;
+    text-align: center;
+	padding-left: 0px;
+	border-bottom: 1px solid black;
+    /* border-left-style: ridge;
+    border-left-color: #CEEAF7;
+    border-left-width: 5px; */
+}
+
+#Venues {
+	padding-left: 0px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 36px !important;
+    text-align: center;
+    /* border-left-style: ridge;
+    border-left-color: #CEEAF7;
+    border-left-width: 5px;
+    border-top-style: ridge;
+    border-top-color: #CEEAF7;
+    border-top-width: 5px; */
+
+  
+}
+
+li {
+    font-size: 18px;
+    text-align: left;
+    padding-left: 20px;
+}
+.footer {
+    position: absolute;
+    right: 0;        
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    border-top-style: ridge;
+    border-top-color: #CEEAF7;
+    border-top-width: 5px;
+}
+
+body {
+    position: relative;
+	overflow: hidden;
+}
+
+#font {
+    font-size: 24px;
+    text-align: center;
+}
+
+#deleteArtist {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 18px;
+    text-align: right;
+    color: black;
+}
+
+#artistDiv, #venueDiv, #locationDiv {
+    background-color: rgba(31,31,31,0.8);
+    color:white;
+	border-top: none;
+	border-color: black;
+	margin-bottom: 0px !important;
+}
+
+.table-scroll-wrapper
+{
+	margin-top: 15px;
+	overflow-y: auto;
+	height: calc(100vh - 90px);
+}
+
+#favArtist, #favVenue
+{
+	position: absolute;
+	top: 5px;
+	right: 4.5vw;
+}
+
+#art-name, #ven-name
+{
+	font-size: 24px;
+}
+
+.panel-heading
+{
+	border: none;
+	padding-right: 0px;
+	border-radius: 0px;
+	height: calc(100vh - 50px);
+	overflow:hidden;
+}
+
+table.table-bordered{
+    border:1px solid #080808;
+    margin-top:20px;
+	padding-bottom: 0px;
+	margin-bottom: 30px;
+  }
+table.table-bordered > thead > tr > th{
+    border:1px solid #080808;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid #080808;
+}
+
+<<<<<<< HEAD
+#radioListDiv
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: rgb(221,221,221);
+	width: 108px;
+	height: 90px;
+	border-radius: 4px;
+	z-index: 13;
+}
+
+
+
+=======
+.panel-default>.panel-heading {
+    background-color: inherit;
+    color: inherit;
+}
+
+>>>>>>> d68859e52a5cf4f9d8a902eb7f9e2dba5df1ed9a
+.runButtonArtist, .runButtonVenue { cursor: pointer; }
+
+.runButtonArtist:hover, .runButtonVenue:hover { text-decoration: underline; }
+
+.artist-item, .venue-item { opacity: 0.5;}
+
+.artist-item:hover, .venue-item:hover { opacity: 1;}
+
+@media screen and (max-width: 1070px)
+{
+	#Artist, #Venues
+	{
+		font-size: 24px !important;
+	}
+}
+
+@media screen and (max-width: 991px)
+{
+	body
+	{
+		overflow: auto;
+	}
+
+}
+
+@media screen and (max-width: 783px) 
+{
+	#hsj
+	{
+		transform: translateY(50px);
+	}
+
+	nav
+	{
+		height: 100px !important;
+	}
+
+	nav input[type="text"]
+	{
+		display: block !important;
+		width: 100%;
+		left: 0px !important;
+		transform: translateX(0px) !important;
+	}
+
+	#searchBtn
+	{
+		top: 57px !important;
+		left: auto !important;
+		right: 50px;
+	}
+
+	#categoryBtn
+	{
+		top: 57px !important;
+		left: auto !important;
+		right: 200px;
+		transform: translateX(0px) !important;
+	}
+
+	#signOut
+	{
+		top: 59px !important;
+	}
+
+}
+
+@media screen and (max-width: 524px) 
+{
+	#hsj
+	{
+		float: auto;
+		width: 100%;
+		text-align: center;
+		transform: translateY(100px);
+	}
+
+	nav
+	{
+		height: 150px !important;
+	}
+
+	nav input[type="text"]
+	{
+		display: block !important;
+		width: 100%;
+		left: 0px !important;
+		transform: translateX(0px) !important;
+	}
+
+	#searchBtn
+	{
+		top: 57px !important;
+		left: 100px !important;
+		right: auto;
+		transform: translateX(0px) !important;
+	}
+
+	#categoryBtn
+	{
+		top: 57px !important;
+		left: 0px !important;
+		right: auto;
+		transform: translateX(0px) !important;
+	}
+
+	#signOut
+	{
+		top: 59px !important;
+	}
+
+}
+
