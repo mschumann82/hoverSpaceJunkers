@@ -10,5 +10,7 @@ Login/Sign Up Page:
 
 Main Page: 
 
+![mainpage](https://user-images.githubusercontent.com/37599851/48036154-52431380-e124-11e8-89ba-35e0dfef5053.jpg)
+
 
 
