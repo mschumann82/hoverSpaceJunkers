@@ -8,6 +8,10 @@ Landing Page:
 
 ![login](https://user-images.githubusercontent.com/37599851/48036221-8ddddd80-e124-11e8-9bab-36859f0c5cc1.jpg)
 
+Registration Page:
+
+![registration](https://user-images.githubusercontent.com/37599851/48036303-f200a180-e124-11e8-98a2-4e862ac8b88b.jpg)
+
 Login Page:
 
 
